@@ -5,13 +5,11 @@ using System.Web;
 
 namespace WebAffinitiesMVC.Models
 {
-    public class ArquivoDetalhe
+    public class ArquivoDetalheLayout
     {
         public int id { get; set; }
-        public string nome { get; set; }
-        public string descricao { get; set; }
-        public DateTime criacao { get; set; }
-        public DateTime alteracao { get; set; }
         public Arquivo arquivo { get; set; }
+        public ICollection<ArquivoDetalhe> arquivoDetalhe { get; set; }
+        public ICollection<Layout> layoutDetalhe { get; set; }
     }
 }

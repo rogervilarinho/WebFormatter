@@ -32,9 +32,9 @@
                             @Html.DisplayFor(modelItem => item.descricao)
                         </td>
                         <td>
-                            @Html.ActionLink("Alterar", "Alterar", "Arquivo", new { id = item.id, @class = "btn btn-primary btn-xs" }) |
-                            @Html.ActionLink("Detalhes", "Detalhar", "Arquivo", new { id = item.id, @class = "btn btn-info btn-xs" }) |
-                            @Html.ActionLink("Excluir", "Excluir", "Arquivo", new { id = item.id, @class = "btn btn-danger btn-xs" })
+                            @Html.ActionLink("Alterar", "Alterar", "Arquivo", new { id = item.id }, new { @class = "btn btn-primary btn-xs" }) |
+                            @Html.ActionLink("Detalhes", "Detalhar", "Arquivo", new { id = item.id }, new { @class = "btn btn-info btn-xs" }) |
+                            @Html.ActionLink("Excluir", "Excluir", "Arquivo", new { id = item.id }, new { @class = "btn btn-danger btn-xs" })
                         </td>
                     </tr>
                 }
@@ -42,4 +42,3 @@
         </table>
     </div>
 </div>
-

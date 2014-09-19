@@ -1,0 +1,35 @@
+﻿@model WebAffinitiesMVC.Models.Arquivo
+@{
+    ViewBag.Title = String.Concat("Detalhes ", Model.nome);
+}
+<div class="container">
+    <div class="page-header">
+        <h2 id="tables">@String.Concat("Detalhes ", Model.nome)</h2>
+    </div>
+</div>
+<div class="container">
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descricao)
+        </dd>
+
+    </dl>
+</div>
+<div class="container">
+    <p>
+        @Html.ActionLink("Alterar", "Alterar", new { id = Model.id }, new { @class = "btn btn-primary" }) |
+        @Html.ActionLink("Voltar", "Modificar", "Arquivos", new { @class = "btn btn-primary" })
+    </p>
+</div>

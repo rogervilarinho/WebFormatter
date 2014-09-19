@@ -22,6 +22,7 @@ namespace WebAffinitiesMVC.Models
         public DbSet<LayoutDetalhe> LayoutDetalhes { get; set; }
         public DbSet<Layout> Layouts { get; set; }
         public DbSet<Hierarquia> Hierarquias { get; set; }
+        public DbSet<ArquivoDetalheLayout> ArquivoDetalheLayouts { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -2,40 +2,52 @@
 @{
     ViewBag.Title = "Alteração de Arquivo";
 }
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Arquivo</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.nome, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.nome, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.nome, "", new { @class = "text-danger" })
-            </div>
-        </div>
+<div class="container">
+    <div class="page-header">
+        <h2 id="tables">Alteração de Tipo de Arquivo</h2>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="well bs-component">
+                @using (Html.BeginForm("Alterar", "Arquivo", FormMethod.Post, new { @class = "form-horizontal" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <fieldset>
+                        <legend>Tipo de Arquivo</legend>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.nome, htmlAttributes: new { @class = "col-lg-2 control-label" })
+                            <div class="col-lg-10">
+                                @Html.EditorFor(model => model.nome, new { htmlAttributes = new { @class = "form-control", placeholder = "Nome" } })
+                                @Html.ValidationMessageFor(model => model.nome, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.descricao, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.descricao, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.descricao, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.descricao, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-lg-10">
+                                @Html.EditorFor(model => model.descricao, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.descricao, "", new { @class = "text-danger" })
+                                <span class="help-block">Digite a descrição do arquivo que esta sendo criado, a mesma será utilizada nos relatórios do sistema.</span>
+                            </div>
+                        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <button class="btn btn-default">Cancelar</button>
+                                <button type="submit" class="btn btn-primary" value="Alterar">Alterar</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                }
             </div>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
+</div>
+<div class="container">
+    @Html.RouteLink("← Voltar", new { action = "Modificar", controller = "Arquivo" }, new { @class = "btn btn-primary" })
 </div>
 
 @section Scripts {

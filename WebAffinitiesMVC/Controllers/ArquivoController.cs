@@ -44,19 +44,41 @@ namespace WebAffinitiesMVC.Controllers
             var arquivos = await db.Arquivos.ToListAsync();
             return View(arquivos);
         }
-        public ActionResult Alterar()
+        public ActionResult Alterar(int id)
         {
-            return View(new WebAffinitiesMVC.Models.Arquivo());
+            var arq = db.Arquivos.Find(id);
+            if (arq == null) HttpNotFound();
+            return View(arq);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Alterar(WebAffinitiesMVC.Models.Arquivo arquivo)
         {
-            if(arquivo == null) return HttpNotFound();
-            var arq = await db.Arquivos.FindAsync(arquivo.id);
-            if (arq == null) return HttpNotFound();
-            db.Entry(arquivo).State = EntityState.Modified;
-            await db.SaveChangesAsync();
+            if (ModelState.IsValid)
+            {
+                if (arquivo == null) return HttpNotFound();
+                var arq = await db.Arquivos.Where(x => x.id == arquivo.id).AsNoTracking().FirstOrDefaultAsync();
+                if (arq == null) return HttpNotFound();
+                db.Entry(arquivo).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return RedirectToAction("Modificar");
+            }
             return View(arquivo);
+        }
+        public async Task<ActionResult> Detalhar(int id)
+        {
+            var arquivo = await db.Arquivos.FindAsync(id);
+            if (arquivo == null) return HttpNotFound();
+            return View(arquivo);
+        }
+        [HttpGet]
+        public async Task<ActionResult> Excluir(int id)
+        {
+            var arquivo = await db.Arquivos.FindAsync(id);
+            if (arquivo == null) return HttpNotFound();
+            db.Arquivos.Remove(arquivo);
+            await db.SaveChangesAsync();
+            return RedirectToAction("Modificar");
         }
         protected override void Dispose(bool disposing)
         {

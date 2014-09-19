@@ -21,21 +21,21 @@
             <div class="navbar-collapse collapse" id="navbar-main">
                 <ul class="nav navbar-nav">
                     @*<li>
-                        @Html.ActionLink("Produtos", "Index", "Produto")
-                    </li>*@
+                            @Html.ActionLink("Produtos", "Index", "Produto")
+                        </li>*@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Formatador <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             @foreach (var item in WebAffinitiesMVC.Controllers.ArquivoController.GetArquivos())
                             {
-                                <li>@Html.ActionLink(item.nome, "Index", "Produto")</li>
+                                <li>@Html.ActionLink(item.nome, "Index", "ArquivoDetalheLayout", new { id = item.id }, null)</li>
                             }
                             @*<li><a href="#">Comissões</a></li>
-                            <li><a href="#">Nêutron</a></li>*@
+                                <li><a href="#">Nêutron</a></li>*@
                             <li class="divider"></li>
                             <li>@Html.ActionLink("Criar", "Criar", "Arquivo")</li>
                             <li>@Html.ActionLink("Modificar", "Modificar", "Arquivo")</li>
-                            <li>@Html.ActionLink("Excluir", "Create", "Arquivo")</li>
+                            <li>@Html.ActionLink("Excluir", "Modificar", "Arquivo")</li>
                         </ul>
                     </li>
                 </ul>
