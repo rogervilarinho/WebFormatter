@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Web Affinities</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/Scripts/js")
+</head>
+<body>
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="../" class="navbar-brand">Web Formatter</a>
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse" id="navbar-main">
+                <ul class="nav navbar-nav">
+                    @*<li>
+                        @Html.ActionLink("Produtos", "Index", "Produto")
+                    </li>*@
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Formatador <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            @foreach (var item in WebAffinitiesMVC.Controllers.ArquivoController.GetArquivos())
+                            {
+                                <li>@Html.ActionLink(item.nome, "Index", "Produto")</li>
+                            }
+                            @*<li><a href="#">Comissões</a></li>
+                            <li><a href="#">Nêutron</a></li>*@
+                            <li class="divider"></li>
+                            <li>@Html.ActionLink("Criar", "Criar", "Arquivo")</li>
+                            <li>@Html.ActionLink("Modificar", "Modificar", "Arquivo")</li>
+                            <li>@Html.ActionLink("Excluir", "Create", "Arquivo")</li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="http://builtwithbootstrap.com/" target="_blank">Relatórios</a></li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+    <div>
+        @RenderBody()
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
