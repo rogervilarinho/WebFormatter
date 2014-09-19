@@ -9,6 +9,7 @@ namespace WebAffinitiesMVC.Models
     public class Arquivo
     {
         public int id { get; set; }
+        [Required(ErrorMessage="O campo nome é obrigatório!")]
         [Display(Name="Nome")]
         public string nome { get; set; }
         [Display(Name="Descrição")]

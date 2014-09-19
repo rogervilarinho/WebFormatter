@@ -10,7 +10,7 @@ namespace WebAffinitiesMVC.Controllers
 {
     public class ArquivoController : Controller
     {
-        WebAffinitiesMVC.Models.WebAffinitiesContext db = new Models.WebAffinitiesContext();
+        WebAffinitiesMVC.Models.WebFormatterContext db = new Models.WebFormatterContext();
         // GET: Arquivo
         public ActionResult Index()
         {
@@ -18,7 +18,7 @@ namespace WebAffinitiesMVC.Controllers
         }
         public static IEnumerable<WebAffinitiesMVC.Models.Arquivo> GetArquivos()
         {
-            using (WebAffinitiesMVC.Models.WebAffinitiesContext db = new Models.WebAffinitiesContext())
+            using (WebAffinitiesMVC.Models.WebFormatterContext db = new Models.WebFormatterContext())
             {
                 var arquivos = db.Arquivos.ToList();
                 return arquivos;
@@ -43,6 +43,20 @@ namespace WebAffinitiesMVC.Controllers
         {
             var arquivos = await db.Arquivos.ToListAsync();
             return View(arquivos);
+        }
+        public ActionResult Alterar()
+        {
+            return View(new WebAffinitiesMVC.Models.Arquivo());
+        }
+        [HttpPost]
+        public async Task<ActionResult> Alterar(WebAffinitiesMVC.Models.Arquivo arquivo)
+        {
+            if(arquivo == null) return HttpNotFound();
+            var arq = await db.Arquivos.FindAsync(arquivo.id);
+            if (arq == null) return HttpNotFound();
+            db.Entry(arquivo).State = EntityState.Modified;
+            await db.SaveChangesAsync();
+            return View(arquivo);
         }
         protected override void Dispose(bool disposing)
         {

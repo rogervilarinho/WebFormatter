@@ -1,40 +1,69 @@
 ﻿@model WebAffinitiesMVC.Models.Arquivo
-
-
-@using (Html.BeginForm("Criar", "Arquivo", FormMethod.Post)) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Arquivo</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.nome, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.nome, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.nome, "", new { @class = "text-danger" })
+@{
+    ViewBag.Title = "Cadastro de Arquivo";
+}
+<div class="container">
+    <div class="page-header">
+        <h2 id="tables">Cadastro de Tipo de Arquivo</h2>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="well bs-component">
+                @using (Html.BeginForm("Criar", "Arquivo", FormMethod.Post, new { @class = "form-horizontal" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <fieldset>
+                        <legend>Tipo de Arquivo</legend>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.nome, htmlAttributes: new { @class = "col-lg-2 control-label" })
+                            <div class="col-lg-10">
+                                @Html.EditorFor(model => model.nome, new { htmlAttributes = new { @class = "form-control", placeholder = "Nome" } })
+                                @Html.ValidationMessageFor(model => model.nome, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.descricao, htmlAttributes: new { @class = "col-lg-2 control-label" })
+                            <div class="col-lg-10">
+                                @Html.TextAreaFor(model => model.descricao, htmlAttributes: new { @class = "form-control", rows = "3" })
+                                @Html.ValidationMessageFor(model => model.descricao, "", new { @class = "text-danger" })
+                                <span class="help-block">Digite a descrição do arquivo que esta sendo criado, a mesma será utilizada nos relatórios do sistema.</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <button class="btn btn-default">Cancelar</button>
+                                <button type="submit" class="btn btn-primary" value="Criar">Cadastrar</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div id="source-button" class="btn btn-primary btn-xs" style="display: none;">&lt; &gt;</div>
+                }
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.descricao, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.descricao, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.descricao, "", new { @class = "text-danger" })
+        <div class="col-lg-6 col-lg-offset-0">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Tipo de Arquivo</h3>
+                </div>
+                <div class="panel-body">
+                    Após a criação de um tipo de arquivo você pode associá-lo a um layout e os validar arquivos antes do seu processamento.
+                </div>
             </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Criar" class="btn btn-default" />
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Estipulantes</h3>
+                </div>
+                <div class="panel-body">
+                    Após a criação de um layout você pode utilizar o arquivo de um estipulante para gerar o arquivo no formato do layout.
+                </div>
             </div>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
+</div>
+<div class="container">
+    @Html.RouteLink("← Voltar", new { action = "Index", controller = "Home" }, new { @class = "btn btn-primary" })
 </div>
 
 @section Scripts {

@@ -7,10 +7,10 @@ using System.Web;
 
 namespace WebAffinitiesMVC.Models
 {
-    public class WebAffinitiesContext : DbContext
+    public class WebFormatterContext : DbContext
     {
-        public WebAffinitiesContext()
-            : base("WebAffinitiesContext")
+        public WebFormatterContext()
+            : base("WebFormatterContext")
         {
         }
 
