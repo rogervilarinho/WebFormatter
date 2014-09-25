@@ -49,6 +49,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -118,21 +120,56 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ArquivoController.cs" />
-    <Compile Include="Controllers\ArquivoDetalheLayoutController.cs" />
+    <Compile Include="Controllers\ArquivoDetalhesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LayoutsController.cs" />
+    <Compile Include="Controllers\ListaDetalhesController.cs" />
+    <Compile Include="Controllers\ListasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Arquivo.cs" />
-    <Compile Include="Models\ArquivoDetalhe.cs" />
-    <Compile Include="Models\ArquivoDetalheLayout.cs" />
-    <Compile Include="Models\Hierarquia.cs" />
-    <Compile Include="Models\Layout.cs" />
-    <Compile Include="Models\LayoutDetalhe.cs" />
-    <Compile Include="Models\Lista.cs" />
-    <Compile Include="Models\TipoCampo.cs" />
-    <Compile Include="Models\Validacao.cs" />
-    <Compile Include="Models\WebFormatterContext.cs" />
+    <Compile Include="Models\ARQUIVO.cs">
+      <DependentUpon>WebFormatter.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ARQUIVODETALHE.cs">
+      <DependentUpon>WebFormatter.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HIERARQUIA.cs">
+      <DependentUpon>WebFormatter.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LAYOUT.cs">
+      <DependentUpon>WebFormatter.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LAYOUTDETALHE.cs">
+      <DependentUpon>WebFormatter.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LISTA.cs">
+      <DependentUpon>WebFormatter.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LISTADETALHE.cs">
+      <DependentUpon>WebFormatter.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TIPO.cs">
+      <DependentUpon>WebFormatter.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VALIDACAO.cs">
+      <DependentUpon>WebFormatter.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WebFormatter.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WebFormatter.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WebFormatter.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WebFormatter.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WebFormatter.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WebFormatter.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -144,6 +181,23 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\WebFormatter.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>WebFormatter.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\WebFormatter.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WebFormatter.edmx</DependentUpon>
+      <LastGenOutput>WebFormatter.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\WebFormatter.edmx.diagram">
+      <DependentUpon>WebFormatter.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\WebFormatter.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WebFormatter.edmx</DependentUpon>
+      <LastGenOutput>WebFormatter.cs</LastGenOutput>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootswatch.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -174,10 +228,31 @@
     <Content Include="Views\Arquivo\Modificar.cshtml" />
     <Content Include="Views\Arquivo\Alterar.cshtml" />
     <Content Include="Views\Arquivo\Detalhar.cshtml" />
-    <Content Include="Views\ArquivoDetalheLayout\Index.cshtml" />
+    <Content Include="Views\Arquivo\Index.cshtml" />
+    <Content Include="Views\ArquivoDetalhes\Create.cshtml" />
+    <Content Include="Views\ArquivoDetalhes\Delete.cshtml" />
+    <Content Include="Views\ArquivoDetalhes\Details.cshtml" />
+    <Content Include="Views\ArquivoDetalhes\Edit.cshtml" />
+    <Content Include="Views\ArquivoDetalhes\Index.cshtml" />
+    <Content Include="Views\Listas\Create.cshtml" />
+    <Content Include="Views\Listas\Delete.cshtml" />
+    <Content Include="Views\Listas\Details.cshtml" />
+    <Content Include="Views\Listas\Edit.cshtml" />
+    <Content Include="Views\Listas\Index.cshtml" />
+    <Content Include="Views\ListaDetalhes\Create.cshtml" />
+    <Content Include="Views\ListaDetalhes\Delete.cshtml" />
+    <Content Include="Views\ListaDetalhes\Details.cshtml" />
+    <Content Include="Views\ListaDetalhes\Edit.cshtml" />
+    <Content Include="Views\ListaDetalhes\Index.cshtml" />
+    <Content Include="Views\Layouts\Create.cshtml" />
+    <Content Include="Views\Layouts\Delete.cshtml" />
+    <Content Include="Views\Layouts\Details.cshtml" />
+    <Content Include="Views\Layouts\Edit.cshtml" />
+    <Content Include="Views\Layouts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Migrations\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
@@ -186,6 +261,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,0 +1,105 @@
+﻿@model WebAffinitiesMVC.Models.ARQUIVODETALHE
+
+@{
+    ViewBag.Title = "Criação de Arquivo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="page-header">
+        <h2 id="tables">Cadastro de Tipo de Arquivo</h2>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="well bs-component">
+                @using (Html.BeginForm("Create", "ArquivoDetalhes", FormMethod.Post, new { @class = "form-horizontal" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <fieldset>
+                        <legend>Tipo de Arquivo</legend>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.NOME, htmlAttributes: new { @class = "col-lg-3 control-label" })
+                            <div class="col-lg-9">
+                                @Html.EditorFor(model => model.NOME, new { htmlAttributes = new { @class = "form-control", placeholder = "Nome" } })
+                                @Html.ValidationMessageFor(model => model.NOME, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.DESCRICAO, htmlAttributes: new { @class = "col-lg-3 control-label" })
+                            <div class="col-lg-9">
+                                @Html.TextAreaFor(model => model.DESCRICAO, htmlAttributes: new { @class = "form-control", rows = "3", placeholder = "Descrição" })
+                                <span class="help-block">Descrição do tipo de arquivo criado (ex: nome do produto ou do arquivo que será validado).</span>
+                                @Html.ValidationMessageFor(model => model.DESCRICAO, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ID_ARQUIVO, htmlAttributes: new { @class = "col-lg-3 control-label" })
+                            <div class="col-lg-9">
+                                @Html.DropDownList("ID_ARQUIVO", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ID_ARQUIVO, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ID_LAYOUT, htmlAttributes: new { @class = "col-lg-3 control-label" })
+                            <div class="col-lg-9">
+                                @Html.DropDownList("ID_LAYOUT", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ID_LAYOUT, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CRIACAO, htmlAttributes: new { @class = "col-lg-3 control-label" })
+                            <div class="col-lg-9">
+                                @Html.EditorFor(model => model.CRIACAO, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.CRIACAO, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ALTERACAO, htmlAttributes: new { @class = "col-lg-3 control-label" })
+                            <div class="col-lg-9">
+                                @Html.EditorFor(model => model.ALTERACAO, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ALTERACAO, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-md-10">
+                                @Html.ActionLink("Cancelar", "Index", "Arquivo", new { idArquivo = Model.ARQUIVO.ID }, new { @class = "btn btn-default" })
+                                <button type="submit" class="btn btn-primary" value="Create">Cadastrar</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                }
+            </div>
+        </div>
+        <div class="col-lg-4 col-lg-offset-0">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Arquivo</h3>
+                </div>
+                <div class="panel-body">
+                    É o tipo de operação a que o arquivo que esta sendo cadastrado pertence!
+                </div>
+            </div>
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Layout</h3>
+                </div>
+                <div class="panel-body">
+                    É o layout que será aplicado na validação dos arquivos para esse tipo de arquivo!
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div>
+        @Html.ActionLink("← Voltar", "Index", "Arquivo", new { idArquivo = Model.ARQUIVO.ID }, new { @class = "btn btn-primary" })
+    </div>
+</div>

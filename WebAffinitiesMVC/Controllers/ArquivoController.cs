@@ -5,59 +5,61 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
+using System.Net;
 
 namespace WebAffinitiesMVC.Controllers
 {
     public class ArquivoController : Controller
     {
-        WebAffinitiesMVC.Models.WebFormatterContext db = new Models.WebFormatterContext();
+        WebAffinitiesMVC.Models.WebFormatterEntities db = new Models.WebFormatterEntities();
         // GET: Arquivo
-        public ActionResult Index()
+        public async Task<ActionResult> Index(int? idArquivo)
         {
-            return View();
+            if (!idArquivo.HasValue) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            return View(await db.ARQUIVO.FindAsync(idArquivo.Value));
         }
-        public static IEnumerable<WebAffinitiesMVC.Models.Arquivo> GetArquivos()
+        public static IEnumerable<WebAffinitiesMVC.Models.ARQUIVO> GetArquivos()
         {
-            using (WebAffinitiesMVC.Models.WebFormatterContext db = new Models.WebFormatterContext())
+            using (WebAffinitiesMVC.Models.WebFormatterEntities db = new Models.WebFormatterEntities())
             {
-                var arquivos = db.Arquivos.ToList();
+                var arquivos = db.ARQUIVO.ToList();
                 return arquivos;
             }
         }
         public ActionResult Criar()
         {
-            return View(new WebAffinitiesMVC.Models.Arquivo());
+            return View(new WebAffinitiesMVC.Models.ARQUIVO());
         }
         [HttpPost]
-        public async Task<ActionResult> Criar(WebAffinitiesMVC.Models.Arquivo arquivo)
+        public async Task<ActionResult> Criar(WebAffinitiesMVC.Models.ARQUIVO arquivo)
         {
             if (!ModelState.IsValid)
             {
                 return View(arquivo);
             }
-            db.Arquivos.Add(arquivo);
+            db.ARQUIVO.Add(arquivo);
             await db.SaveChangesAsync();
             return RedirectToAction("Index", "Home");
         }
         public async Task<ActionResult> Modificar()
         {
-            var arquivos = await db.Arquivos.ToListAsync();
+            var arquivos = await db.ARQUIVO.ToListAsync();
             return View(arquivos);
         }
         public ActionResult Alterar(int id)
         {
-            var arq = db.Arquivos.Find(id);
+            var arq = db.ARQUIVO.Find(id);
             if (arq == null) HttpNotFound();
             return View(arq);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Alterar(WebAffinitiesMVC.Models.Arquivo arquivo)
+        public async Task<ActionResult> Alterar(WebAffinitiesMVC.Models.ARQUIVO arquivo)
         {
             if (ModelState.IsValid)
             {
                 if (arquivo == null) return HttpNotFound();
-                var arq = await db.Arquivos.Where(x => x.id == arquivo.id).AsNoTracking().FirstOrDefaultAsync();
+                var arq = await db.ARQUIVO.Where(x => x.ID == arquivo.ID).AsNoTracking().FirstOrDefaultAsync();
                 if (arq == null) return HttpNotFound();
                 db.Entry(arquivo).State = EntityState.Modified;
                 await db.SaveChangesAsync();
@@ -67,16 +69,16 @@ namespace WebAffinitiesMVC.Controllers
         }
         public async Task<ActionResult> Detalhar(int id)
         {
-            var arquivo = await db.Arquivos.FindAsync(id);
+            var arquivo = await db.ARQUIVO.FindAsync(id);
             if (arquivo == null) return HttpNotFound();
             return View(arquivo);
         }
         [HttpGet]
         public async Task<ActionResult> Excluir(int id)
         {
-            var arquivo = await db.Arquivos.FindAsync(id);
+            var arquivo = await db.ARQUIVO.FindAsync(id);
             if (arquivo == null) return HttpNotFound();
-            db.Arquivos.Remove(arquivo);
+            db.ARQUIVO.Remove(arquivo);
             await db.SaveChangesAsync();
             return RedirectToAction("Modificar");
         }

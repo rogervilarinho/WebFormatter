@@ -1,0 +1,73 @@
+﻿@model WebAffinitiesMVC.Models.ARQUIVODETALHE
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ARQUIVODETALHE</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NOME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DESCRICAO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DESCRICAO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CRIACAO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CRIACAO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ALTERACAO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ALTERACAO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ARQUIVO.NOME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ARQUIVO.NOME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LAYOUT.NOME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LAYOUT.NOME)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

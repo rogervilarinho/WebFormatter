@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebAffinitiesMVC.Models.Arquivo>
+﻿@model IEnumerable<WebAffinitiesMVC.Models.ARQUIVO>
 @{
     ViewBag.Title = "Lista de Arquivos";
 }
@@ -13,10 +13,10 @@
             <thead>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.nome)
+                        @Html.DisplayNameFor(model => model.NOME)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.descricao)
+                        @Html.DisplayNameFor(model => model.DESCRICAO)
                     </th>
                     <th></th>
                 </tr>
@@ -26,15 +26,15 @@
                 {
                     <tr class="active">
                         <td>
-                            @Html.DisplayFor(modelItem => item.nome)
+                            @Html.DisplayFor(modelItem => item.NOME)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.descricao)
+                            @Html.DisplayFor(modelItem => item.DESCRICAO)
                         </td>
                         <td>
-                            @Html.ActionLink("Alterar", "Alterar", "Arquivo", new { id = item.id }, new { @class = "btn btn-primary btn-xs" }) |
-                            @Html.ActionLink("Detalhes", "Detalhar", "Arquivo", new { id = item.id }, new { @class = "btn btn-info btn-xs" }) |
-                            @Html.ActionLink("Excluir", "Excluir", "Arquivo", new { id = item.id }, new { @class = "btn btn-danger btn-xs" })
+                            @Html.ActionLink("Alterar", "Alterar", "Arquivo", new { id = item.ID }, new { @class = "btn btn-primary btn-xs" }) |
+                            @Html.ActionLink("Detalhes", "Detalhar", "Arquivo", new { id = item.ID }, new { @class = "btn btn-info btn-xs" }) |
+                            @Html.ActionLink("Excluir", "Excluir", "Arquivo", new { id = item.ID }, new { @class = "btn btn-danger btn-xs" })
                         </td>
                     </tr>
                 }

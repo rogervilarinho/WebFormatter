@@ -12,18 +12,16 @@ namespace WebAffinitiesMVC.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class HIERARQUIA
+    public partial class TIPO
     {
-        public HIERARQUIA()
+        public TIPO()
         {
             this.LAYOUTDETALHE = new HashSet<LAYOUTDETALHE>();
         }
     
         public int ID { get; set; }
         public string NOME { get; set; }
-        public int ID_ARQUIVO { get; set; }
     
-        public virtual ARQUIVO ARQUIVO { get; set; }
         public virtual ICollection<LAYOUTDETALHE> LAYOUTDETALHE { get; set; }
     }
 }

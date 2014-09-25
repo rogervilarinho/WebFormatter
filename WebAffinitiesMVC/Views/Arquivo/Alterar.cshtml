@@ -1,4 +1,4 @@
-﻿@model WebAffinitiesMVC.Models.Arquivo
+﻿@model WebAffinitiesMVC.Models.ARQUIVO
 @{
     ViewBag.Title = "Alteração de Arquivo";
 }
@@ -18,26 +18,26 @@
                         <legend>Tipo de Arquivo</legend>
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="form-group">
-                            @Html.LabelFor(model => model.nome, htmlAttributes: new { @class = "col-lg-2 control-label" })
+                            @Html.LabelFor(model => model.NOME, htmlAttributes: new { @class = "col-lg-2 control-label" })
                             <div class="col-lg-10">
-                                @Html.EditorFor(model => model.nome, new { htmlAttributes = new { @class = "form-control", placeholder = "Nome" } })
-                                @Html.ValidationMessageFor(model => model.nome, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.NOME, new { htmlAttributes = new { @class = "form-control", placeholder = "Nome" } })
+                                @Html.ValidationMessageFor(model => model.NOME, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.descricao, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.DESCRICAO, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-lg-10">
-                                @Html.EditorFor(model => model.descricao, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.descricao, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.DESCRICAO, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DESCRICAO, "", new { @class = "text-danger" })
                                 <span class="help-block">Digite a descrição do arquivo que esta sendo criado, a mesma será utilizada nos relatórios do sistema.</span>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-2">
-                                <button class="btn btn-default">Cancelar</button>
-                                <button type="submit" class="btn btn-primary" value="Alterar">Alterar</button>
+                                <button class="btn btn-default btn-sm">Cancelar</button>
+                                <button type="submit" class="btn btn-primary btn-sm" value="Alterar">Alterar</button>
                             </div>
                         </div>
                     </fieldset>
@@ -47,7 +47,7 @@
     </div>
 </div>
 <div class="container">
-    @Html.RouteLink("← Voltar", new { action = "Modificar", controller = "Arquivo" }, new { @class = "btn btn-primary" })
+    @Html.RouteLink("← Voltar", new { action = "Modificar", controller = "Arquivo" }, new { @class = "btn btn-primary btn-sm" })
 </div>
 
 @section Scripts {

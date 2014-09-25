@@ -1,0 +1,710 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="WebFormatterModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ARQUIVO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DESCRICAO" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="ARQUIVODETALHE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DESCRICAO" Type="varchar" MaxLength="200" />
+          <Property Name="ID_ARQUIVO" Type="int" Nullable="false" />
+          <Property Name="ID_LAYOUT" Type="int" Nullable="false" />
+          <Property Name="CRIACAO" Type="datetime" />
+          <Property Name="ALTERACAO" Type="datetime" />
+        </EntityType>
+        <EntityType Name="HIERARQUIA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ID_ARQUIVO" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LAYOUT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DESCRICAO" Type="varchar" MaxLength="200" />
+          <Property Name="ID_ARQUIVO" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LAYOUTDETALHE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_LAYOUT" Type="int" Nullable="false" />
+          <Property Name="TAMANHO" Type="int" Nullable="false" />
+          <Property Name="INICIO" Type="int" Nullable="false" />
+          <Property Name="FIM" Type="int" Nullable="false" />
+          <Property Name="ID_TIPO" Type="int" Nullable="false" />
+          <Property Name="ID_VALIDACAO" Type="int" />
+          <Property Name="ID_LISTA" Type="int" />
+          <Property Name="ACEITAVEL" Type="varchar" MaxLength="50" />
+          <Property Name="FIXO" Type="varchar" MaxLength="10" />
+          <Property Name="NOME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ID_HIERARQUIA" Type="int" Nullable="false" />
+          <Property Name="OBRIGATORIO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LISTA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DESCRICAO" Type="varchar" MaxLength="200" />
+          <Property Name="ID_ARQUIVO" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LISTADETALHE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VALOR" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="ID_LISTA" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TIPO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOME" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VALIDACAO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DESCRICAO" Type="varchar" MaxLength="200" />
+          <Property Name="ID_ARQUIVO" Type="int" />
+        </EntityType>
+        <Association Name="FK_ARQUIVODETALHE_ARQUIVO">
+          <End Role="ARQUIVO" Type="Self.ARQUIVO" Multiplicity="1" />
+          <End Role="ARQUIVODETALHE" Type="Self.ARQUIVODETALHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ARQUIVO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ARQUIVODETALHE">
+              <PropertyRef Name="ID_ARQUIVO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ARQUIVODETALHE_LAYOUT">
+          <End Role="LAYOUT" Type="Self.LAYOUT" Multiplicity="1" />
+          <End Role="ARQUIVODETALHE" Type="Self.ARQUIVODETALHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LAYOUT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ARQUIVODETALHE">
+              <PropertyRef Name="ID_LAYOUT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HIERARQUIA_ARQUIVO">
+          <End Role="ARQUIVO" Type="Self.ARQUIVO" Multiplicity="1" />
+          <End Role="HIERARQUIA" Type="Self.HIERARQUIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ARQUIVO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HIERARQUIA">
+              <PropertyRef Name="ID_ARQUIVO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LAYOUT_ARQUIVO">
+          <End Role="ARQUIVO" Type="Self.ARQUIVO" Multiplicity="1" />
+          <End Role="LAYOUT" Type="Self.LAYOUT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ARQUIVO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LAYOUT">
+              <PropertyRef Name="ID_ARQUIVO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LAYOUTDETALHE_HIERARQUIA">
+          <End Role="HIERARQUIA" Type="Self.HIERARQUIA" Multiplicity="1" />
+          <End Role="LAYOUTDETALHE" Type="Self.LAYOUTDETALHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HIERARQUIA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LAYOUTDETALHE">
+              <PropertyRef Name="ID_HIERARQUIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LAYOUTDETALHE_LAYOUT">
+          <End Role="TIPO" Type="Self.TIPO" Multiplicity="1" />
+          <End Role="LAYOUTDETALHE" Type="Self.LAYOUTDETALHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LAYOUTDETALHE">
+              <PropertyRef Name="ID_TIPO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LAYOUTDETALHE_LISTA">
+          <End Role="LISTA" Type="Self.LISTA" Multiplicity="0..1" />
+          <End Role="LAYOUTDETALHE" Type="Self.LAYOUTDETALHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LISTA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LAYOUTDETALHE">
+              <PropertyRef Name="ID_LISTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LAYOUTDETALHE_VALIDACAO">
+          <End Role="VALIDACAO" Type="Self.VALIDACAO" Multiplicity="0..1" />
+          <End Role="LAYOUTDETALHE" Type="Self.LAYOUTDETALHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VALIDACAO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LAYOUTDETALHE">
+              <PropertyRef Name="ID_VALIDACAO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LISTA_ARQUIVO">
+          <End Role="ARQUIVO" Type="Self.ARQUIVO" Multiplicity="1" />
+          <End Role="LISTA" Type="Self.LISTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ARQUIVO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LISTA">
+              <PropertyRef Name="ID_ARQUIVO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LISTADETALHE_LISTA">
+          <End Role="LISTA" Type="Self.LISTA" Multiplicity="1" />
+          <End Role="LISTADETALHE" Type="Self.LISTADETALHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LISTA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LISTADETALHE">
+              <PropertyRef Name="ID_LISTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VALIDACAO_ARQUIVO">
+          <End Role="ARQUIVO" Type="Self.ARQUIVO" Multiplicity="0..1" />
+          <End Role="VALIDACAO" Type="Self.VALIDACAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ARQUIVO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VALIDACAO">
+              <PropertyRef Name="ID_ARQUIVO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WebFormatterModelStoreContainer">
+          <EntitySet Name="ARQUIVO" EntityType="Self.ARQUIVO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ARQUIVODETALHE" EntityType="Self.ARQUIVODETALHE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HIERARQUIA" EntityType="Self.HIERARQUIA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LAYOUT" EntityType="Self.LAYOUT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LAYOUTDETALHE" EntityType="Self.LAYOUTDETALHE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LISTA" EntityType="Self.LISTA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LISTADETALHE" EntityType="Self.LISTADETALHE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TIPO" EntityType="Self.TIPO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VALIDACAO" EntityType="Self.VALIDACAO" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ARQUIVODETALHE_ARQUIVO" Association="Self.FK_ARQUIVODETALHE_ARQUIVO">
+            <End Role="ARQUIVO" EntitySet="ARQUIVO" />
+            <End Role="ARQUIVODETALHE" EntitySet="ARQUIVODETALHE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ARQUIVODETALHE_LAYOUT" Association="Self.FK_ARQUIVODETALHE_LAYOUT">
+            <End Role="LAYOUT" EntitySet="LAYOUT" />
+            <End Role="ARQUIVODETALHE" EntitySet="ARQUIVODETALHE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HIERARQUIA_ARQUIVO" Association="Self.FK_HIERARQUIA_ARQUIVO">
+            <End Role="ARQUIVO" EntitySet="ARQUIVO" />
+            <End Role="HIERARQUIA" EntitySet="HIERARQUIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LAYOUT_ARQUIVO" Association="Self.FK_LAYOUT_ARQUIVO">
+            <End Role="ARQUIVO" EntitySet="ARQUIVO" />
+            <End Role="LAYOUT" EntitySet="LAYOUT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LAYOUTDETALHE_HIERARQUIA" Association="Self.FK_LAYOUTDETALHE_HIERARQUIA">
+            <End Role="HIERARQUIA" EntitySet="HIERARQUIA" />
+            <End Role="LAYOUTDETALHE" EntitySet="LAYOUTDETALHE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LAYOUTDETALHE_LAYOUT" Association="Self.FK_LAYOUTDETALHE_LAYOUT">
+            <End Role="TIPO" EntitySet="TIPO" />
+            <End Role="LAYOUTDETALHE" EntitySet="LAYOUTDETALHE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LAYOUTDETALHE_LISTA" Association="Self.FK_LAYOUTDETALHE_LISTA">
+            <End Role="LISTA" EntitySet="LISTA" />
+            <End Role="LAYOUTDETALHE" EntitySet="LAYOUTDETALHE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LAYOUTDETALHE_VALIDACAO" Association="Self.FK_LAYOUTDETALHE_VALIDACAO">
+            <End Role="VALIDACAO" EntitySet="VALIDACAO" />
+            <End Role="LAYOUTDETALHE" EntitySet="LAYOUTDETALHE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LISTA_ARQUIVO" Association="Self.FK_LISTA_ARQUIVO">
+            <End Role="ARQUIVO" EntitySet="ARQUIVO" />
+            <End Role="LISTA" EntitySet="LISTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LISTADETALHE_LISTA" Association="Self.FK_LISTADETALHE_LISTA">
+            <End Role="LISTA" EntitySet="LISTA" />
+            <End Role="LISTADETALHE" EntitySet="LISTADETALHE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VALIDACAO_ARQUIVO" Association="Self.FK_VALIDACAO_ARQUIVO">
+            <End Role="ARQUIVO" EntitySet="ARQUIVO" />
+            <End Role="VALIDACAO" EntitySet="VALIDACAO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WebFormatterModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ARQUIVO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DESCRICAO" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ARQUIVODETALHE" Relationship="Self.FK_ARQUIVODETALHE_ARQUIVO" FromRole="ARQUIVO" ToRole="ARQUIVODETALHE" />
+          <NavigationProperty Name="HIERARQUIA" Relationship="Self.FK_HIERARQUIA_ARQUIVO" FromRole="ARQUIVO" ToRole="HIERARQUIA" />
+          <NavigationProperty Name="LAYOUT" Relationship="Self.FK_LAYOUT_ARQUIVO" FromRole="ARQUIVO" ToRole="LAYOUT" />
+          <NavigationProperty Name="LISTA" Relationship="Self.FK_LISTA_ARQUIVO" FromRole="ARQUIVO" ToRole="LISTA" />
+          <NavigationProperty Name="VALIDACAO" Relationship="Self.FK_VALIDACAO_ARQUIVO" FromRole="ARQUIVO" ToRole="VALIDACAO" />
+        </EntityType>
+        <EntityType Name="ARQUIVODETALHE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DESCRICAO" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ID_ARQUIVO" Type="Int32" Nullable="false" />
+          <Property Name="ID_LAYOUT" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ARQUIVO" Relationship="Self.FK_ARQUIVODETALHE_ARQUIVO" FromRole="ARQUIVODETALHE" ToRole="ARQUIVO" />
+          <NavigationProperty Name="LAYOUT" Relationship="Self.FK_ARQUIVODETALHE_LAYOUT" FromRole="ARQUIVODETALHE" ToRole="LAYOUT" />
+          <Property Name="CRIACAO" Type="DateTime" Precision="3" />
+          <Property Name="ALTERACAO" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="HIERARQUIA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_ARQUIVO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ARQUIVO" Relationship="Self.FK_HIERARQUIA_ARQUIVO" FromRole="HIERARQUIA" ToRole="ARQUIVO" />
+          <NavigationProperty Name="LAYOUTDETALHE" Relationship="Self.FK_LAYOUTDETALHE_HIERARQUIA" FromRole="HIERARQUIA" ToRole="LAYOUTDETALHE" />
+        </EntityType>
+        <EntityType Name="LAYOUT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DESCRICAO" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ID_ARQUIVO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ARQUIVO" Relationship="Self.FK_LAYOUT_ARQUIVO" FromRole="LAYOUT" ToRole="ARQUIVO" />
+          <NavigationProperty Name="ARQUIVODETALHE" Relationship="Self.FK_ARQUIVODETALHE_LAYOUT" FromRole="LAYOUT" ToRole="ARQUIVODETALHE" />
+        </EntityType>
+        <EntityType Name="LAYOUTDETALHE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_LAYOUT" Type="Int32" Nullable="false" />
+          <Property Name="TAMANHO" Type="Int32" Nullable="false" />
+          <Property Name="INICIO" Type="Int32" Nullable="false" />
+          <Property Name="FIM" Type="Int32" Nullable="false" />
+          <Property Name="ID_TIPO" Type="Int32" Nullable="false" />
+          <Property Name="ID_VALIDACAO" Type="Int32" />
+          <Property Name="ID_LISTA" Type="Int32" />
+          <Property Name="ACEITAVEL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FIXO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_HIERARQUIA" Type="Int32" Nullable="false" />
+          <Property Name="OBRIGATORIO" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="HIERARQUIA" Relationship="Self.FK_LAYOUTDETALHE_HIERARQUIA" FromRole="LAYOUTDETALHE" ToRole="HIERARQUIA" />
+          <NavigationProperty Name="TIPO" Relationship="Self.FK_LAYOUTDETALHE_LAYOUT" FromRole="LAYOUTDETALHE" ToRole="TIPO" />
+          <NavigationProperty Name="LISTA" Relationship="Self.FK_LAYOUTDETALHE_LISTA" FromRole="LAYOUTDETALHE" ToRole="LISTA" />
+          <NavigationProperty Name="VALIDACAO" Relationship="Self.FK_LAYOUTDETALHE_VALIDACAO" FromRole="LAYOUTDETALHE" ToRole="VALIDACAO" />
+        </EntityType>
+        <EntityType Name="LISTA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DESCRICAO" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ID_ARQUIVO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ARQUIVO" Relationship="Self.FK_LISTA_ARQUIVO" FromRole="LISTA" ToRole="ARQUIVO" />
+          <NavigationProperty Name="LAYOUTDETALHE" Relationship="Self.FK_LAYOUTDETALHE_LISTA" FromRole="LISTA" ToRole="LAYOUTDETALHE" />
+          <NavigationProperty Name="LISTADETALHE" Relationship="WebFormatterModel.FK_LISTADETALHE_LISTA" FromRole="LISTA" ToRole="LISTADETALHE" />
+        </EntityType>
+        <EntityType Name="TIPO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="LAYOUTDETALHE" Relationship="Self.FK_LAYOUTDETALHE_LAYOUT" FromRole="TIPO" ToRole="LAYOUTDETALHE" />
+        </EntityType>
+        <EntityType Name="VALIDACAO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DESCRICAO" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ID_ARQUIVO" Type="Int32" />
+          <NavigationProperty Name="ARQUIVO" Relationship="Self.FK_VALIDACAO_ARQUIVO" FromRole="VALIDACAO" ToRole="ARQUIVO" />
+          <NavigationProperty Name="LAYOUTDETALHE" Relationship="Self.FK_LAYOUTDETALHE_VALIDACAO" FromRole="VALIDACAO" ToRole="LAYOUTDETALHE" />
+        </EntityType>
+        <Association Name="FK_ARQUIVODETALHE_ARQUIVO">
+          <End Role="ARQUIVO" Type="Self.ARQUIVO" Multiplicity="1" />
+          <End Role="ARQUIVODETALHE" Type="Self.ARQUIVODETALHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ARQUIVO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ARQUIVODETALHE">
+              <PropertyRef Name="ID_ARQUIVO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HIERARQUIA_ARQUIVO">
+          <End Role="ARQUIVO" Type="Self.ARQUIVO" Multiplicity="1" />
+          <End Role="HIERARQUIA" Type="Self.HIERARQUIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ARQUIVO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HIERARQUIA">
+              <PropertyRef Name="ID_ARQUIVO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LAYOUT_ARQUIVO">
+          <End Role="ARQUIVO" Type="Self.ARQUIVO" Multiplicity="1" />
+          <End Role="LAYOUT" Type="Self.LAYOUT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ARQUIVO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LAYOUT">
+              <PropertyRef Name="ID_ARQUIVO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LISTA_ARQUIVO">
+          <End Role="ARQUIVO" Type="Self.ARQUIVO" Multiplicity="1" />
+          <End Role="LISTA" Type="Self.LISTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ARQUIVO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LISTA">
+              <PropertyRef Name="ID_ARQUIVO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VALIDACAO_ARQUIVO">
+          <End Role="ARQUIVO" Type="Self.ARQUIVO" Multiplicity="0..1" />
+          <End Role="VALIDACAO" Type="Self.VALIDACAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ARQUIVO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VALIDACAO">
+              <PropertyRef Name="ID_ARQUIVO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ARQUIVODETALHE_LAYOUT">
+          <End Role="LAYOUT" Type="Self.LAYOUT" Multiplicity="1" />
+          <End Role="ARQUIVODETALHE" Type="Self.ARQUIVODETALHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LAYOUT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ARQUIVODETALHE">
+              <PropertyRef Name="ID_LAYOUT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LAYOUTDETALHE_HIERARQUIA">
+          <End Role="HIERARQUIA" Type="Self.HIERARQUIA" Multiplicity="1" />
+          <End Role="LAYOUTDETALHE" Type="Self.LAYOUTDETALHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HIERARQUIA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LAYOUTDETALHE">
+              <PropertyRef Name="ID_HIERARQUIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LAYOUTDETALHE_LAYOUT">
+          <End Role="TIPO" Type="Self.TIPO" Multiplicity="1" />
+          <End Role="LAYOUTDETALHE" Type="Self.LAYOUTDETALHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LAYOUTDETALHE">
+              <PropertyRef Name="ID_TIPO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LAYOUTDETALHE_LISTA">
+          <End Role="LISTA" Type="Self.LISTA" Multiplicity="0..1" />
+          <End Role="LAYOUTDETALHE" Type="Self.LAYOUTDETALHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LISTA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LAYOUTDETALHE">
+              <PropertyRef Name="ID_LISTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LAYOUTDETALHE_VALIDACAO">
+          <End Role="VALIDACAO" Type="Self.VALIDACAO" Multiplicity="0..1" />
+          <End Role="LAYOUTDETALHE" Type="Self.LAYOUTDETALHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VALIDACAO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LAYOUTDETALHE">
+              <PropertyRef Name="ID_VALIDACAO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WebFormatterEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ARQUIVO" EntityType="Self.ARQUIVO" />
+          <EntitySet Name="ARQUIVODETALHE" EntityType="Self.ARQUIVODETALHE" />
+          <EntitySet Name="HIERARQUIA" EntityType="Self.HIERARQUIA" />
+          <EntitySet Name="LAYOUT" EntityType="Self.LAYOUT" />
+          <EntitySet Name="LAYOUTDETALHE" EntityType="Self.LAYOUTDETALHE" />
+          <EntitySet Name="LISTA" EntityType="Self.LISTA" />
+          <EntitySet Name="TIPO" EntityType="Self.TIPO" />
+          <EntitySet Name="VALIDACAO" EntityType="Self.VALIDACAO" />
+          <AssociationSet Name="FK_ARQUIVODETALHE_ARQUIVO" Association="Self.FK_ARQUIVODETALHE_ARQUIVO">
+            <End Role="ARQUIVO" EntitySet="ARQUIVO" />
+            <End Role="ARQUIVODETALHE" EntitySet="ARQUIVODETALHE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HIERARQUIA_ARQUIVO" Association="Self.FK_HIERARQUIA_ARQUIVO">
+            <End Role="ARQUIVO" EntitySet="ARQUIVO" />
+            <End Role="HIERARQUIA" EntitySet="HIERARQUIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LAYOUT_ARQUIVO" Association="Self.FK_LAYOUT_ARQUIVO">
+            <End Role="ARQUIVO" EntitySet="ARQUIVO" />
+            <End Role="LAYOUT" EntitySet="LAYOUT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LISTA_ARQUIVO" Association="Self.FK_LISTA_ARQUIVO">
+            <End Role="ARQUIVO" EntitySet="ARQUIVO" />
+            <End Role="LISTA" EntitySet="LISTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VALIDACAO_ARQUIVO" Association="Self.FK_VALIDACAO_ARQUIVO">
+            <End Role="ARQUIVO" EntitySet="ARQUIVO" />
+            <End Role="VALIDACAO" EntitySet="VALIDACAO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ARQUIVODETALHE_LAYOUT" Association="Self.FK_ARQUIVODETALHE_LAYOUT">
+            <End Role="LAYOUT" EntitySet="LAYOUT" />
+            <End Role="ARQUIVODETALHE" EntitySet="ARQUIVODETALHE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LAYOUTDETALHE_HIERARQUIA" Association="Self.FK_LAYOUTDETALHE_HIERARQUIA">
+            <End Role="HIERARQUIA" EntitySet="HIERARQUIA" />
+            <End Role="LAYOUTDETALHE" EntitySet="LAYOUTDETALHE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LAYOUTDETALHE_LAYOUT" Association="Self.FK_LAYOUTDETALHE_LAYOUT">
+            <End Role="TIPO" EntitySet="TIPO" />
+            <End Role="LAYOUTDETALHE" EntitySet="LAYOUTDETALHE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LAYOUTDETALHE_LISTA" Association="Self.FK_LAYOUTDETALHE_LISTA">
+            <End Role="LISTA" EntitySet="LISTA" />
+            <End Role="LAYOUTDETALHE" EntitySet="LAYOUTDETALHE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LAYOUTDETALHE_VALIDACAO" Association="Self.FK_LAYOUTDETALHE_VALIDACAO">
+            <End Role="VALIDACAO" EntitySet="VALIDACAO" />
+            <End Role="LAYOUTDETALHE" EntitySet="LAYOUTDETALHE" />
+          </AssociationSet>
+          <EntitySet Name="LISTADETALHE" EntityType="WebFormatterModel.LISTADETALHE" />
+          <AssociationSet Name="FK_LISTADETALHE_LISTA" Association="WebFormatterModel.FK_LISTADETALHE_LISTA">
+            <End Role="LISTA" EntitySet="LISTA" />
+            <End Role="LISTADETALHE" EntitySet="LISTADETALHE" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="LISTADETALHE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VALOR" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ID_LISTA" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="LISTA" Relationship="WebFormatterModel.FK_LISTADETALHE_LISTA" FromRole="LISTADETALHE" ToRole="LISTA" />
+        </EntityType>
+        <Association Name="FK_LISTADETALHE_LISTA">
+          <End Type="WebFormatterModel.LISTA" Role="LISTA" Multiplicity="1" />
+          <End Type="WebFormatterModel.LISTADETALHE" Role="LISTADETALHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LISTA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LISTADETALHE">
+              <PropertyRef Name="ID_LISTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WebFormatterModelStoreContainer" CdmEntityContainer="WebFormatterEntities">
+          <EntitySetMapping Name="ARQUIVO">
+            <EntityTypeMapping TypeName="WebFormatterModel.ARQUIVO">
+              <MappingFragment StoreEntitySet="ARQUIVO">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOME" ColumnName="NOME" />
+                <ScalarProperty Name="DESCRICAO" ColumnName="DESCRICAO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ARQUIVODETALHE">
+            <EntityTypeMapping TypeName="WebFormatterModel.ARQUIVODETALHE">
+              <MappingFragment StoreEntitySet="ARQUIVODETALHE">
+                <ScalarProperty Name="ALTERACAO" ColumnName="ALTERACAO" />
+                <ScalarProperty Name="CRIACAO" ColumnName="CRIACAO" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOME" ColumnName="NOME" />
+                <ScalarProperty Name="DESCRICAO" ColumnName="DESCRICAO" />
+                <ScalarProperty Name="ID_ARQUIVO" ColumnName="ID_ARQUIVO" />
+                <ScalarProperty Name="ID_LAYOUT" ColumnName="ID_LAYOUT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HIERARQUIA">
+            <EntityTypeMapping TypeName="WebFormatterModel.HIERARQUIA">
+              <MappingFragment StoreEntitySet="HIERARQUIA">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOME" ColumnName="NOME" />
+                <ScalarProperty Name="ID_ARQUIVO" ColumnName="ID_ARQUIVO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LAYOUT">
+            <EntityTypeMapping TypeName="WebFormatterModel.LAYOUT">
+              <MappingFragment StoreEntitySet="LAYOUT">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOME" ColumnName="NOME" />
+                <ScalarProperty Name="DESCRICAO" ColumnName="DESCRICAO" />
+                <ScalarProperty Name="ID_ARQUIVO" ColumnName="ID_ARQUIVO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LAYOUTDETALHE">
+            <EntityTypeMapping TypeName="WebFormatterModel.LAYOUTDETALHE">
+              <MappingFragment StoreEntitySet="LAYOUTDETALHE">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_LAYOUT" ColumnName="ID_LAYOUT" />
+                <ScalarProperty Name="TAMANHO" ColumnName="TAMANHO" />
+                <ScalarProperty Name="INICIO" ColumnName="INICIO" />
+                <ScalarProperty Name="FIM" ColumnName="FIM" />
+                <ScalarProperty Name="ID_TIPO" ColumnName="ID_TIPO" />
+                <ScalarProperty Name="ID_VALIDACAO" ColumnName="ID_VALIDACAO" />
+                <ScalarProperty Name="ID_LISTA" ColumnName="ID_LISTA" />
+                <ScalarProperty Name="ACEITAVEL" ColumnName="ACEITAVEL" />
+                <ScalarProperty Name="FIXO" ColumnName="FIXO" />
+                <ScalarProperty Name="NOME" ColumnName="NOME" />
+                <ScalarProperty Name="ID_HIERARQUIA" ColumnName="ID_HIERARQUIA" />
+                <ScalarProperty Name="OBRIGATORIO" ColumnName="OBRIGATORIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LISTA">
+            <EntityTypeMapping TypeName="WebFormatterModel.LISTA">
+              <MappingFragment StoreEntitySet="LISTA">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOME" ColumnName="NOME" />
+                <ScalarProperty Name="DESCRICAO" ColumnName="DESCRICAO" />
+                <ScalarProperty Name="ID_ARQUIVO" ColumnName="ID_ARQUIVO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPO">
+            <EntityTypeMapping TypeName="WebFormatterModel.TIPO">
+              <MappingFragment StoreEntitySet="TIPO">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOME" ColumnName="NOME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VALIDACAO">
+            <EntityTypeMapping TypeName="WebFormatterModel.VALIDACAO">
+              <MappingFragment StoreEntitySet="VALIDACAO">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOME" ColumnName="NOME" />
+                <ScalarProperty Name="DESCRICAO" ColumnName="DESCRICAO" />
+                <ScalarProperty Name="ID_ARQUIVO" ColumnName="ID_ARQUIVO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LISTADETALHE">
+            <EntityTypeMapping TypeName="WebFormatterModel.LISTADETALHE">
+              <MappingFragment StoreEntitySet="LISTADETALHE">
+                <ScalarProperty Name="ID_LISTA" ColumnName="ID_LISTA" />
+                <ScalarProperty Name="VALOR" ColumnName="VALOR" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

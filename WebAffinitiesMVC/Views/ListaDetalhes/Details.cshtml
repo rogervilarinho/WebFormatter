@@ -1,0 +1,38 @@
+﻿@model WebAffinitiesMVC.Models.LISTADETALHE
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="page-header">
+        <h2 id="tables">@String.Concat("Detalhes ", Model.LISTA.NOME)</h2>
+    </div>
+</div>
+
+<div class="container">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.VALOR)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.VALOR)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ID_LISTA)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LISTA.NOME)
+            </dd>
+
+        </dl>
+</div>
+<div class="container">
+    <p>
+        @Html.ActionLink("Alterar", "Edit", "ListaDetalhes", new { id = Model.ID }, new { @class = "btn btn-primary btn-xs" }) |
+        @Html.ActionLink("Voltar", "Index", "ListaDetalhes", new { idLista = Model.ID_LISTA }, new { @class = "btn btn-primary btn-xs" })
+    </p>
+</div>

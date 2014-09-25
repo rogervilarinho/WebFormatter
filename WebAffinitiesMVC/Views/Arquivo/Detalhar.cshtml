@@ -1,35 +1,35 @@
-﻿@model WebAffinitiesMVC.Models.Arquivo
+﻿@model WebAffinitiesMVC.Models.ARQUIVO
 @{
-    ViewBag.Title = String.Concat("Detalhes ", Model.nome);
+    ViewBag.Title = String.Concat("Detalhes ", Model.NOME);
 }
 <div class="container">
     <div class="page-header">
-        <h2 id="tables">@String.Concat("Detalhes ", Model.nome)</h2>
+        <h2 id="tables">@String.Concat("Detalhes ", Model.NOME)</h2>
     </div>
 </div>
 <div class="container">
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.nome)
+            @Html.DisplayNameFor(model => model.NOME)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.nome)
+            @Html.DisplayFor(model => model.NOME)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.descricao)
+            @Html.DisplayNameFor(model => model.DESCRICAO)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.descricao)
+            @Html.DisplayFor(model => model.DESCRICAO)
         </dd>
 
     </dl>
 </div>
 <div class="container">
     <p>
-        @Html.ActionLink("Alterar", "Alterar", new { id = Model.id }, new { @class = "btn btn-primary" }) |
-        @Html.ActionLink("Voltar", "Modificar", "Arquivos", new { @class = "btn btn-primary" })
+        @Html.ActionLink("Alterar", "Alterar", new { id = Model.ID }, new { @class = "btn btn-primary btn-xs" }) |
+        @Html.ActionLink("Voltar", "Modificar", "Arquivos", new { @class = "btn btn-primary btn-xs" })
     </p>
 </div>

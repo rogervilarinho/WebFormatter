@@ -11,19 +11,19 @@ namespace WebAffinitiesMVC.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
-    public partial class HIERARQUIA
+    public partial class LISTADETALHE
     {
-        public HIERARQUIA()
-        {
-            this.LAYOUTDETALHE = new HashSet<LAYOUTDETALHE>();
-        }
-    
         public int ID { get; set; }
-        public string NOME { get; set; }
-        public int ID_ARQUIVO { get; set; }
+        [Display(Name="Valor")]
+        [Required(ErrorMessage="O campo valor é obrigatório!")]
+        public string VALOR { get; set; }
+        [Display(Name="Lista")]
+        [Required(ErrorMessage = "A lista do valor é obrigatória!")]
+        [Range(1, int.MaxValue, ErrorMessage = "A lista do valor é obrigatória!")]
+        public int ID_LISTA { get; set; }
     
-        public virtual ARQUIVO ARQUIVO { get; set; }
-        public virtual ICollection<LAYOUTDETALHE> LAYOUTDETALHE { get; set; }
+        public virtual LISTA LISTA { get; set; }
     }
 }

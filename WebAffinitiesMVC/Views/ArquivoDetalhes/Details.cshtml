@@ -1,0 +1,67 @@
+﻿@model WebAffinitiesMVC.Models.ARQUIVODETALHE
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ARQUIVODETALHE</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NOME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DESCRICAO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DESCRICAO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CRIACAO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CRIACAO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ALTERACAO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ALTERACAO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ARQUIVO.NOME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ARQUIVO.NOME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LAYOUT.NOME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LAYOUT.NOME)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

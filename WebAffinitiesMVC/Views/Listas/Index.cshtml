@@ -1,0 +1,66 @@
+﻿@model IEnumerable<WebAffinitiesMVC.Models.LISTA>
+
+@{
+    ViewBag.Title = String.Concat("Listas de Validação ", Model.FirstOrDefault().ARQUIVO.NOME);
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="page-header">
+        <h2 id="tables">@String.Concat("Listas de Validação ", Model.FirstOrDefault().ARQUIVO.NOME)</h2>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3">
+            <ul class="nav nav-pills nav-stacked">
+                <li>@Html.ActionLink(String.Concat("Arquivo tipo ", Model.FirstOrDefault().ARQUIVO.NOME), "Index", "Arquivo", new { idArquivo = Model.FirstOrDefault().ARQUIVO.ID }, null)</li>
+                <li>@Html.ActionLink(String.Concat("Layout tipo ", Model.FirstOrDefault().ARQUIVO.NOME), "Index", "ArquivoDetalhes", new { idArquivo = Model.FirstOrDefault().ARQUIVO.ID }, null)</li>
+                <li class="active">@Html.ActionLink(String.Concat("Lista de valição do tipo ", Model.FirstOrDefault().ARQUIVO.NOME), "Index", "Listas", new { idArquivo = Model.FirstOrDefault().ARQUIVO.ID }, null)</li>
+            </ul>
+        </div>
+        <div class="col-lg-9 col-lg-offset-0">
+            <div class="row">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.NOME)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.DESCRICAO)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (!String.IsNullOrEmpty(Model.FirstOrDefault().NOME))
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr class="warning">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NOME)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DESCRICAO)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Valores", "Index", "ListaDetalhes", new { idLista = item.ID }, new { @class = "btn btn-success btn-xs" }) |
+                                        @Html.ActionLink("Alterar", "Edit", "Listas", new { id = item.ID }, new { @class = "btn btn-primary btn-xs" }) |
+                                        @Html.ActionLink("Detalhes", "Details", "Listas", new { id = item.ID }, new { @class = "btn btn-info btn-xs" }) |
+                                        @Html.ActionLink("Excluir", "Delete", "Listas", new { id = item.ID }, new { @class = "btn btn-danger btn-xs" })
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                @Html.ActionLink("Nova Lista", "Create", "Listas", new { idArquivo = Model.FirstOrDefault().ARQUIVO.ID }, new { @class = "btn btn-primary btn-sm" })
+            </div>
+        </div>
+    </div>
+</div>

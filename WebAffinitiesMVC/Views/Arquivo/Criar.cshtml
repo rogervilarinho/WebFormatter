@@ -1,4 +1,4 @@
-﻿@model WebAffinitiesMVC.Models.Arquivo
+﻿@model WebAffinitiesMVC.Models.ARQUIVO
 @{
     ViewBag.Title = "Cadastro de Arquivo";
 }
@@ -17,17 +17,17 @@
                     <fieldset>
                         <legend>Tipo de Arquivo</legend>
                         <div class="form-group">
-                            @Html.LabelFor(model => model.nome, htmlAttributes: new { @class = "col-lg-2 control-label" })
+                            @Html.LabelFor(model => model.NOME, htmlAttributes: new { @class = "col-lg-2 control-label" })
                             <div class="col-lg-10">
-                                @Html.EditorFor(model => model.nome, new { htmlAttributes = new { @class = "form-control", placeholder = "Nome" } })
-                                @Html.ValidationMessageFor(model => model.nome, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.NOME, new { htmlAttributes = new { @class = "form-control", placeholder = "Nome" } })
+                                @Html.ValidationMessageFor(model => model.NOME, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(model => model.descricao, htmlAttributes: new { @class = "col-lg-2 control-label" })
+                            @Html.LabelFor(model => model.DESCRICAO, htmlAttributes: new { @class = "col-lg-2 control-label" })
                             <div class="col-lg-10">
-                                @Html.TextAreaFor(model => model.descricao, htmlAttributes: new { @class = "form-control", rows = "3" })
-                                @Html.ValidationMessageFor(model => model.descricao, "", new { @class = "text-danger" })
+                                @Html.TextAreaFor(model => model.DESCRICAO, htmlAttributes: new { @class = "form-control", rows = "3" })
+                                @Html.ValidationMessageFor(model => model.DESCRICAO, "", new { @class = "text-danger" })
                                 <span class="help-block">Digite a descrição do arquivo que esta sendo criado, a mesma será utilizada nos relatórios do sistema.</span>
                             </div>
                         </div>
