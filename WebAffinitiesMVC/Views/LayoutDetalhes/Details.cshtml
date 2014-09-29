@@ -1,0 +1,115 @@
+﻿@model WebAffinitiesMVC.Models.LAYOUTDETALHE
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>LAYOUTDETALHE</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_LAYOUT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_LAYOUT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TAMANHO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TAMANHO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.INICIO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.INICIO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FIM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FIM)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ACEITAVEL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ACEITAVEL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FIXO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FIXO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NOME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OBRIGATORIO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OBRIGATORIO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HIERARQUIA.NOME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HIERARQUIA.NOME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TIPO.NOME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TIPO.NOME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LISTA.NOME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LISTA.NOME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VALIDACAO.NOME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VALIDACAO.NOME)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
