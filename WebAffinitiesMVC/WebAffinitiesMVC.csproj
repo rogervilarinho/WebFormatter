@@ -173,6 +173,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\WebFormatter.mdf" />
+    <Content Include="App_Data\WebFormatter_log.ldf">
+      <DependentUpon>WebFormatter.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap.readable.css" />
     <Content Include="Content\bootstrap.readable.min.css" />
     <Content Include="Content\bootswatch.min.css" />
@@ -251,7 +255,6 @@
     <Content Include="Views\Layouts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Migrations\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>

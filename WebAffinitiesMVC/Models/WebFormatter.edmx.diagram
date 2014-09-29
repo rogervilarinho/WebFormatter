@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="173fec65456c430091ef0a64a2a58c95" Name="Diagram1" ZoomLevel="95">
+      <Diagram DiagramId="173fec65456c430091ef0a64a2a58c95" Name="Diagram1" ZoomLevel="71">
         <EntityTypeShape EntityType="WebFormatterModel.ARQUIVO" Width="1.5" PointX="4.875" PointY="11.125" IsExpanded="false" />
         <EntityTypeShape EntityType="WebFormatterModel.ARQUIVODETALHE" Width="1.5" PointX="1" PointY="9.25" IsExpanded="false" />
         <EntityTypeShape EntityType="WebFormatterModel.HIERARQUIA" Width="1.5" PointX="7" PointY="9.125" IsExpanded="false" />
