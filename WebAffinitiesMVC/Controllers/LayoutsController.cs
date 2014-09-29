@@ -81,7 +81,8 @@ namespace WebAffinitiesMVC.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ID_ARQUIVO = new SelectList(db.ARQUIVO, "ID", "NOME", lAYOUT.ID_ARQUIVO);
+            ViewBag.ID_ARQUIVO = new SelectList(db.ARQUIVO.Where(x => x.ID.Equals(lAYOUT.ID_ARQUIVO)), "ID", "NOME", lAYOUT.ID_ARQUIVO);
+            lAYOUT.ARQUIVO = await db.ARQUIVO.FindAsync(lAYOUT.ID_ARQUIVO);
             return View(lAYOUT);
         }
 
@@ -96,9 +97,10 @@ namespace WebAffinitiesMVC.Controllers
             {
                 db.Entry(lAYOUT).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Layouts", new { idArquivo = lAYOUT.ID_ARQUIVO });
             }
-            ViewBag.ID_ARQUIVO = new SelectList(db.ARQUIVO, "ID", "NOME", lAYOUT.ID_ARQUIVO);
+            ViewBag.ID_ARQUIVO = new SelectList(db.ARQUIVO.Where(x => x.ID.Equals(lAYOUT.ID_ARQUIVO)), "ID", "NOME", lAYOUT.ID_ARQUIVO);
+            lAYOUT.ARQUIVO = await db.ARQUIVO.FindAsync(lAYOUT.ID_ARQUIVO);
             return View(lAYOUT);
         }
 
@@ -125,7 +127,7 @@ namespace WebAffinitiesMVC.Controllers
             LAYOUT lAYOUT = await db.LAYOUT.FindAsync(id);
             db.LAYOUT.Remove(lAYOUT);
             await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Layouts", new { idArquivo = lAYOUT.ID_ARQUIVO });
         }
 
         protected override void Dispose(bool disposing)

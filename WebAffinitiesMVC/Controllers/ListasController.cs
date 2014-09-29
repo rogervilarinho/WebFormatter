@@ -83,7 +83,7 @@ namespace WebAffinitiesMVC.Controllers
                 return HttpNotFound();
             }
             ViewBag.ID_ARQUIVO = new SelectList(db.ARQUIVO.Where(x => x.ID.Equals(lISTA.ID_ARQUIVO)), "ID", "NOME", lISTA.ID_ARQUIVO);
-            lISTA.ARQUIVO = db.ARQUIVO.Find(lISTA.ID_ARQUIVO);
+            lISTA.ARQUIVO = await db.ARQUIVO.FindAsync(lISTA.ID_ARQUIVO);
             return View(lISTA);
         }
 
