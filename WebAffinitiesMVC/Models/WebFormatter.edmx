@@ -77,6 +77,16 @@
           <Property Name="VALOR" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="ID_LISTA" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="TIPO">
           <Key>
             <PropertyRef Name="ID" />
@@ -154,14 +164,14 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_LAYOUTDETALHE_LAYOUT">
-          <End Role="TIPO" Type="Self.TIPO" Multiplicity="1" />
+          <End Role="LAYOUT" Type="Self.LAYOUT" Multiplicity="1" />
           <End Role="LAYOUTDETALHE" Type="Self.LAYOUTDETALHE" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TIPO">
+            <Principal Role="LAYOUT">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="LAYOUTDETALHE">
-              <PropertyRef Name="ID_TIPO" />
+              <PropertyRef Name="ID_LAYOUT" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -174,6 +184,18 @@
             </Principal>
             <Dependent Role="LAYOUTDETALHE">
               <PropertyRef Name="ID_LISTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LAYOUTDETALHE_TIPO">
+          <End Role="TIPO" Type="Self.TIPO" Multiplicity="1" />
+          <End Role="LAYOUTDETALHE" Type="Self.LAYOUTDETALHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LAYOUTDETALHE">
+              <PropertyRef Name="ID_TIPO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -233,6 +255,7 @@
           <EntitySet Name="LAYOUTDETALHE" EntityType="Self.LAYOUTDETALHE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LISTA" EntityType="Self.LISTA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LISTADETALHE" EntityType="Self.LISTADETALHE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TIPO" EntityType="Self.TIPO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VALIDACAO" EntityType="Self.VALIDACAO" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_ARQUIVODETALHE_ARQUIVO" Association="Self.FK_ARQUIVODETALHE_ARQUIVO">
@@ -256,11 +279,15 @@
             <End Role="LAYOUTDETALHE" EntitySet="LAYOUTDETALHE" />
           </AssociationSet>
           <AssociationSet Name="FK_LAYOUTDETALHE_LAYOUT" Association="Self.FK_LAYOUTDETALHE_LAYOUT">
-            <End Role="TIPO" EntitySet="TIPO" />
+            <End Role="LAYOUT" EntitySet="LAYOUT" />
             <End Role="LAYOUTDETALHE" EntitySet="LAYOUTDETALHE" />
           </AssociationSet>
           <AssociationSet Name="FK_LAYOUTDETALHE_LISTA" Association="Self.FK_LAYOUTDETALHE_LISTA">
             <End Role="LISTA" EntitySet="LISTA" />
+            <End Role="LAYOUTDETALHE" EntitySet="LAYOUTDETALHE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LAYOUTDETALHE_TIPO" Association="Self.FK_LAYOUTDETALHE_TIPO">
+            <End Role="TIPO" EntitySet="TIPO" />
             <End Role="LAYOUTDETALHE" EntitySet="LAYOUTDETALHE" />
           </AssociationSet>
           <AssociationSet Name="FK_LAYOUTDETALHE_VALIDACAO" Association="Self.FK_LAYOUTDETALHE_VALIDACAO">
@@ -331,6 +358,7 @@
           <Property Name="ID_ARQUIVO" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ARQUIVO" Relationship="Self.FK_LAYOUT_ARQUIVO" FromRole="LAYOUT" ToRole="ARQUIVO" />
           <NavigationProperty Name="ARQUIVODETALHE" Relationship="Self.FK_ARQUIVODETALHE_LAYOUT" FromRole="LAYOUT" ToRole="ARQUIVODETALHE" />
+          <NavigationProperty Name="LAYOUTDETALHE" Relationship="WebFormatterModel.FK_LAYOUTDETALHE_LAYOUT1" FromRole="LAYOUT" ToRole="LAYOUTDETALHE" />
         </EntityType>
         <EntityType Name="LAYOUTDETALHE">
           <Key>
@@ -353,6 +381,7 @@
           <NavigationProperty Name="TIPO" Relationship="Self.FK_LAYOUTDETALHE_LAYOUT" FromRole="LAYOUTDETALHE" ToRole="TIPO" />
           <NavigationProperty Name="LISTA" Relationship="Self.FK_LAYOUTDETALHE_LISTA" FromRole="LAYOUTDETALHE" ToRole="LISTA" />
           <NavigationProperty Name="VALIDACAO" Relationship="Self.FK_LAYOUTDETALHE_VALIDACAO" FromRole="LAYOUTDETALHE" ToRole="VALIDACAO" />
+          <NavigationProperty Name="LAYOUT" Relationship="WebFormatterModel.FK_LAYOUTDETALHE_LAYOUT1" FromRole="LAYOUTDETALHE" ToRole="LAYOUT" />
         </EntityType>
         <EntityType Name="LISTA">
           <Key>
@@ -559,6 +588,11 @@
             <End Role="LISTA" EntitySet="LISTA" />
             <End Role="LISTADETALHE" EntitySet="LISTADETALHE" />
           </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="WebFormatterModel.sysdiagrams" />
+          <AssociationSet Name="FK_LAYOUTDETALHE_LAYOUT1" Association="WebFormatterModel.FK_LAYOUTDETALHE_LAYOUT1">
+            <End Role="LAYOUT" EntitySet="LAYOUT" />
+            <End Role="LAYOUTDETALHE" EntitySet="LAYOUTDETALHE" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="LISTADETALHE">
           <Key>
@@ -578,6 +612,28 @@
             </Principal>
             <Dependent Role="LISTADETALHE">
               <PropertyRef Name="ID_LISTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_LAYOUTDETALHE_LAYOUT1">
+          <End Type="WebFormatterModel.LAYOUT" Role="LAYOUT" Multiplicity="1" />
+          <End Type="WebFormatterModel.LAYOUTDETALHE" Role="LAYOUTDETALHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LAYOUT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LAYOUTDETALHE">
+              <PropertyRef Name="ID_LAYOUT" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -681,6 +737,17 @@
                 <ScalarProperty Name="ID_LISTA" ColumnName="ID_LISTA" />
                 <ScalarProperty Name="VALOR" ColumnName="VALOR" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="WebFormatterModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

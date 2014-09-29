@@ -16,21 +16,21 @@ namespace WebAffinitiesMVC.Models
     public partial class ARQUIVODETALHE
     {
         public int ID { get; set; }
-        [Display(Name="Nome")]
-        [Required(ErrorMessage="O campo nome é obrigatório!")]
+        [Display(Name = "Nome")]
+        [Required(ErrorMessage = "O campo nome é obrigatório!")]
         public string NOME { get; set; }
         [Display(Name = "Descrição")]
         public string DESCRICAO { get; set; }
-        [Display(Name="Arquivo")]
+        [Display(Name = "Arquivo")]
         public int ID_ARQUIVO { get; set; }
         [Display(Name = "Layout")]
         [Range(1, int.MaxValue, ErrorMessage = "O layout do arquivo é obrigatório!")]
         public int ID_LAYOUT { get; set; }
-        [Display(Name="Data de Criação")]
+        [Display(Name = "Data de Criação")]
         public Nullable<System.DateTime> CRIACAO { get; set; }
         [Display(Name = "Data de Alteração")]
         public Nullable<System.DateTime> ALTERACAO { get; set; }
-    
+
         public virtual ARQUIVO ARQUIVO { get; set; }
         public virtual LAYOUT LAYOUT { get; set; }
     }

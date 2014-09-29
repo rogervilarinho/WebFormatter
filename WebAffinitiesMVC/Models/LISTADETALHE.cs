@@ -16,10 +16,10 @@ namespace WebAffinitiesMVC.Models
     public partial class LISTADETALHE
     {
         public int ID { get; set; }
-        [Display(Name="Valor")]
-        [Required(ErrorMessage="O campo valor é obrigatório!")]
+        [Display(Name = "Valor")]
+        [Required(ErrorMessage = "O campo valor é obrigatório!")]
         public string VALOR { get; set; }
-        [Display(Name="Lista")]
+        [Display(Name = "Lista")]
         [Required(ErrorMessage = "A lista do valor é obrigatória!")]
         [Range(1, int.MaxValue, ErrorMessage = "A lista do valor é obrigatória!")]
         public int ID_LISTA { get; set; }

@@ -122,6 +122,7 @@
     <Compile Include="Controllers\ArquivoController.cs" />
     <Compile Include="Controllers\ArquivoDetalhesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LayoutDetalhesController.cs" />
     <Compile Include="Controllers\LayoutsController.cs" />
     <Compile Include="Controllers\ListaDetalhesController.cs" />
     <Compile Include="Controllers\ListasController.cs" />
@@ -253,6 +254,11 @@
     <Content Include="Views\Layouts\Details.cshtml" />
     <Content Include="Views\Layouts\Edit.cshtml" />
     <Content Include="Views\Layouts\Index.cshtml" />
+    <Content Include="Views\LayoutDetalhes\Create.cshtml" />
+    <Content Include="Views\LayoutDetalhes\Delete.cshtml" />
+    <Content Include="Views\LayoutDetalhes\Details.cshtml" />
+    <Content Include="Views\LayoutDetalhes\Edit.cshtml" />
+    <Content Include="Views\LayoutDetalhes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Migrations\" />

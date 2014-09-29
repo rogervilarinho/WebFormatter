@@ -11,26 +11,46 @@ namespace WebAffinitiesMVC.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class LAYOUTDETALHE
     {
         public int ID { get; set; }
+        [Display(Name="Layout")]
         public int ID_LAYOUT { get; set; }
+        [Display(Name = "Tamanho")]
+        [Required(ErrorMessage="O tamanho do campo é obrigatório!")]
         public int TAMANHO { get; set; }
+        [Display(Name = "Inicio")]
         public int INICIO { get; set; }
+        [Display(Name = "Fim")]
         public int FIM { get; set; }
+        [Display(Name = "Tipo")]
+        [Required(ErrorMessage = "O tipo do campo é obrigatório!")]
         public int ID_TIPO { get; set; }
+        [Display(Name = "Validação")]
         public Nullable<int> ID_VALIDACAO { get; set; }
+        [Display(Name = "Lista")]
         public Nullable<int> ID_LISTA { get; set; }
+        [Display(Name = "Aceitável")]
         public string ACEITAVEL { get; set; }
+        [Display(Name = "Fixo")]
+        [Required(ErrorMessage = "O fixo do campo é obrigatório!")]
         public string FIXO { get; set; }
+        [Display(Name = "Nome")]
+        [Required(ErrorMessage = "O nome do campo é obrigatório!")]
         public string NOME { get; set; }
+        [Display(Name = "Hierarquia")]
+        [Required(ErrorMessage = "A hierarquia do campo é obrigatório!")]
         public int ID_HIERARQUIA { get; set; }
+        [Display(Name = "Obrigatório")]
+        [Required(ErrorMessage = "A obrigatoriedade do campo é obrigatório!")]
         public bool OBRIGATORIO { get; set; }
     
         public virtual HIERARQUIA HIERARQUIA { get; set; }
         public virtual TIPO TIPO { get; set; }
         public virtual LISTA LISTA { get; set; }
         public virtual VALIDACAO VALIDACAO { get; set; }
+        public virtual LAYOUT LAYOUT { get; set; }
     }
 }

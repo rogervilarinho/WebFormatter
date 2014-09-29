@@ -46,7 +46,7 @@
                                         @Html.DisplayFor(modelItem => item.ARQUIVO.NOME)
                                     </td>
                                     <td>
-                                        @Html.ActionLink("Regras", "Index", "LayoutDetalhes", new { idLista = item.ID }, new { @class = "btn btn-success btn-xs" }) |
+                                        @Html.ActionLink("Regras", "Index", "LayoutDetalhes", new { idLayout = item.ID }, new { @class = "btn btn-success btn-xs" }) |
                                         @Html.ActionLink("Alterar", "Edit", "Layouts", new { id = item.ID }, new { @class = "btn btn-primary btn-xs" }) |
                                         @Html.ActionLink("Detalhes", "Details", "Layouts", new { id = item.ID }, new { @class = "btn btn-info btn-xs" }) |
                                         @Html.ActionLink("Excluir", "Delete", "Layouts", new { id = item.ID }, new { @class = "btn btn-danger btn-xs" })

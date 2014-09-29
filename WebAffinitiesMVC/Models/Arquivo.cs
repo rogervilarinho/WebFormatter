@@ -23,10 +23,10 @@ namespace WebAffinitiesMVC.Models
             this.LISTA = new HashSet<LISTA>();
             this.VALIDACAO = new HashSet<VALIDACAO>();
         }
-    
+
         public int ID { get; set; }
-        [Display(Name="Nome")]
-        [Required(ErrorMessage="O campo nome é obrigatório!")]
+        [Display(Name = "Nome")]
+        [Required(ErrorMessage = "O campo nome é obrigatório!")]
         public string NOME { get; set; }
         [Display(Name = "Descrição")]
         public string DESCRICAO { get; set; }
