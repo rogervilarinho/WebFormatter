@@ -11,6 +11,7 @@ namespace WebAffinitiesMVC.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class LAYOUT
     {
@@ -20,8 +21,13 @@ namespace WebAffinitiesMVC.Models
         }
     
         public int ID { get; set; }
+        [Display(Name="Nome")]
+        [Required(ErrorMessage="O campo nome do layout é obrigatório!")]
         public string NOME { get; set; }
+        [Display(Name = "Descrição")]
         public string DESCRICAO { get; set; }
+        [Display(Name = "Arquivo")]
+        [Range(1, int.MaxValue, ErrorMessage = "O arquivo do layout é obrigatório!")]
         public int ID_ARQUIVO { get; set; }
     
         public virtual ARQUIVO ARQUIVO { get; set; }

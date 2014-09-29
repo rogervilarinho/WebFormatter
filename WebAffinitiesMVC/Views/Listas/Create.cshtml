@@ -18,7 +18,7 @@
                 {
                     @Html.AntiForgeryToken()
                     <fieldset>
-                        <legend>Lista de Validação</legend>
+                        <legend>Nova lista de Validação</legend>
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="form-group">
                             @Html.LabelFor(model => model.NOME, htmlAttributes: new { @class = "col-lg-2 control-label" })

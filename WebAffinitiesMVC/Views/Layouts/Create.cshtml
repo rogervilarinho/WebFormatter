@@ -1,52 +1,73 @@
 ﻿@model WebAffinitiesMVC.Models.LAYOUT
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Criação de Layout";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="container">
+    <div class="page-header">
+        <h2 id="tables">Cadastro de Layout</h2>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="well bs-component">
+                @using (Html.BeginForm("Create", "Layouts", FormMethod.Post, new { @class = "form-horizontal" }))
+                {
+                    @Html.AntiForgeryToken()
 
-<h2>Create</h2>
+                    <fieldset>
+                        <legend>Novo layout</legend>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.NOME, htmlAttributes: new { @class = "col-lg-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.NOME, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.NOME, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>LAYOUT</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.NOME, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.NOME, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NOME, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.DESCRICAO, htmlAttributes: new { @class = "col-lg-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.TextAreaFor(model => model.DESCRICAO, htmlAttributes: new { @class = "form-control", rows = "3", placeholder = "Descrição" })
+                                @Html.ValidationMessageFor(model => model.DESCRICAO, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ID_ARQUIVO, htmlAttributes: new { @class = "col-lg-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("ID_ARQUIVO", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ID_ARQUIVO, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                @Html.ActionLink("Cancelar", "Index", "Layouts", new { idArquivo = Model.ARQUIVO.ID }, new { @class = "btn btn-default" })
+                                <button type="submit" class="btn btn-primary" value="Create">Cadastrar</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                }
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.DESCRICAO, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DESCRICAO, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DESCRICAO, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ID_ARQUIVO, "ID_ARQUIVO", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ID_ARQUIVO", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ID_ARQUIVO, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+        <div class="col-lg-6">
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Arquivo</h3>
+                </div>
+                <div class="panel-body">
+                    É o tipo de operação a que o layout que esta sendo cadastrado pertence!
+                </div>
             </div>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
+</div>
+<div class="container">
+    <div>
+        @Html.ActionLink("← Voltar", "Index", "Layouts", new { idArquivo = Model.ARQUIVO.ID }, new { @class = "btn btn-primary" })
+    </div>
 </div>

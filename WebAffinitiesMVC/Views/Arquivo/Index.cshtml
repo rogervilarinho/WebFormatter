@@ -12,8 +12,8 @@
     <div class="row">
         <div class="col-lg-3">
             <ul class="nav nav-pills nav-stacked">
-                <li class="active">@Html.ActionLink(String.Concat("Arquivo tipo ", Model.NOME), "Index", "ArquivoDetalhes", new { arquivo = Model.ID }, null)</li>
-                <li>@Html.ActionLink(String.Concat("Layout tipo ", Model.NOME), "Index", "ArquivoDetalhes", new { arquivo = Model }, null)</li>
+                <li class="active">@Html.ActionLink(String.Concat("Arquivo tipo ", Model.NOME), "Index", "ArquivoDetalhes", new { idArquivo = Model.ID }, null)</li>
+                <li>@Html.ActionLink(String.Concat("Layout tipo ", Model.NOME), "Index", "Layouts", new { idArquivo = Model.ID }, null)</li>
                 <li>@Html.ActionLink(String.Concat("Lista de valição do tipo ", Model.NOME), "Index", "Listas", new { idArquivo = Model.ID }, null)</li>
             </ul>
         </div>

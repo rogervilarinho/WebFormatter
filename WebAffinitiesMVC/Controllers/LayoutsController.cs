@@ -23,7 +23,7 @@ namespace WebAffinitiesMVC.Controllers
             var retorno = await lAYOUT.Where(x => x.ID_ARQUIVO.Equals(idArquivo.Value)).ToListAsync();
             if (retorno.Count == 0)
             {
-
+                return View(new List<LAYOUT>() { new LAYOUT() { ARQUIVO = await db.ARQUIVO.FindAsync(idArquivo.Value) } });
             }
             return View(retorno);
         }
@@ -44,10 +44,11 @@ namespace WebAffinitiesMVC.Controllers
         }
 
         // GET: Layouts/Create
-        public ActionResult Create()
+        public ActionResult Create(int? idArquivo)
         {
-            ViewBag.ID_ARQUIVO = new SelectList(db.ARQUIVO, "ID", "NOME");
-            return View();
+            if (!idArquivo.HasValue) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            ViewBag.ID_ARQUIVO = new SelectList(db.ARQUIVO.Where(x => x.ID.Equals(idArquivo.Value)), "ID", "NOME");
+            return View(new LAYOUT() { ARQUIVO = db.ARQUIVO.Find(idArquivo.Value) });
         }
 
         // POST: Layouts/Create
@@ -61,10 +62,10 @@ namespace WebAffinitiesMVC.Controllers
             {
                 db.LAYOUT.Add(lAYOUT);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Layouts", new { idArquivo = lAYOUT.ID_ARQUIVO });
             }
-
-            ViewBag.ID_ARQUIVO = new SelectList(db.ARQUIVO, "ID", "NOME", lAYOUT.ID_ARQUIVO);
+            ViewBag.ID_ARQUIVO = new SelectList(db.ARQUIVO.Where(x => x.ID.Equals(lAYOUT.ID_ARQUIVO)), "ID", "NOME", lAYOUT.ID_ARQUIVO);
+            lAYOUT.ARQUIVO = await db.ARQUIVO.FindAsync(lAYOUT.ID_ARQUIVO);
             return View(lAYOUT);
         }
 
