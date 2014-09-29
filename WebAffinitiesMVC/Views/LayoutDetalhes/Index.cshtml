@@ -53,56 +53,59 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model)
+                    @if (!String.IsNullOrEmpty(Model.FirstOrDefault().NOME))
                     {
-                        <tr class="active">
-                            <td>
-                                @Html.HiddenFor(modelItem => item.ID_LAYOUT)
-                                @Html.DisplayFor(modelItem => item.NOME)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.FIXO)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.HIERARQUIA.NOME)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.TAMANHO)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.INICIO)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.FIM)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.OBRIGATORIO)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.TIPO.NOME)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.LISTA.NOME)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.VALIDACAO.NOME)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ACEITAVEL)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Alterar", "Edit", "LayoutDetalhes", new { id = item.ID }, new { @class = "btn btn-primary btn-xs" }) |
-                                @Html.ActionLink("Detalhes", "Details", "LayoutDetalhes", new { id = item.ID }, new { @class = "btn btn-info btn-xs" }) |
-                                @Html.ActionLink("Excluir", "Delete", "LayoutDetalhes", new { id = item.ID }, new { @class = "btn btn-danger btn-xs" })
-                            </td>
-                        </tr>
+                        foreach (var item in Model)
+                        {
+                            <tr class="active">
+                                <td>
+                                    @Html.HiddenFor(modelItem => item.ID_LAYOUT)
+                                    @Html.DisplayFor(modelItem => item.NOME)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FIXO)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.HIERARQUIA.NOME)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TAMANHO)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.INICIO)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FIM)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OBRIGATORIO)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TIPO.NOME)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LISTA.NOME)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.VALIDACAO.NOME)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ACEITAVEL)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Alterar", "Edit", "LayoutDetalhes", new { id = item.ID }, new { @class = "btn btn-primary btn-xs" }) |
+                                    @Html.ActionLink("Detalhes", "Details", "LayoutDetalhes", new { id = item.ID }, new { @class = "btn btn-info btn-xs" }) |
+                                    @Html.ActionLink("Excluir", "Delete", "LayoutDetalhes", new { id = item.ID }, new { @class = "btn btn-danger btn-xs" })
+                                </td>
+                            </tr>
+                        }
                     }
                 </tbody>
             </table>
         </div>
         <div class="row">
-            @Html.ActionLink("← Voltar", "Index", "Layouts", new { idArquivo = Model.FirstOrDefault().LAYOUT.ID_ARQUIVO }, new { @class = "btn btn-primary btn-xs" })
-            @Html.ActionLink("Novo Campo", "Create", "ListaDetalhes", new { idLayout = Model.FirstOrDefault().LAYOUT.ID }, new { @class = "btn btn-primary btn-xs" })
+            @Html.ActionLink("← Voltar", "Index", "LayoutDetalhes", new { idLayout = Model.FirstOrDefault().LAYOUT.ID }, new { @class = "btn btn-primary btn-xs" })
+            @Html.ActionLink("Novo Campo", "Create", "LayoutDetalhes", new { idLayout = Model.FirstOrDefault().LAYOUT.ID }, new { @class = "btn btn-primary btn-xs" })
         </div>
     </div>
 </div>

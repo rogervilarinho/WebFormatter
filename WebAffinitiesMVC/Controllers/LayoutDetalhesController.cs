@@ -44,13 +44,17 @@ namespace WebAffinitiesMVC.Controllers
         }
 
         // GET: LayoutDetalhes/Create
-        public ActionResult Create()
+        public ActionResult Create(int? idLayout)
         {
+            if (!idLayout.HasValue) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            var layout = db.LAYOUT.Find(idLayout.Value);
+            if (layout == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            ViewBag.ID_LAYOUT = new SelectList(db.LAYOUT.Where(x => x.ID.Equals(idLayout.Value)), "ID", "NOME");
             ViewBag.ID_HIERARQUIA = new SelectList(db.HIERARQUIA, "ID", "NOME");
             ViewBag.ID_TIPO = new SelectList(db.TIPO, "ID", "NOME");
-            ViewBag.ID_LISTA = new SelectList(db.LISTA, "ID", "NOME");
+            ViewBag.ID_LISTA = new SelectList(db.LISTA.Where(x => x.ARQUIVO.ID.Equals(layout.ID_ARQUIVO)), "ID", "NOME");
             ViewBag.ID_VALIDACAO = new SelectList(db.VALIDACAO, "ID", "NOME");
-            return View();
+            return View(new LAYOUTDETALHE() { LAYOUT = db.LAYOUT.Find(idLayout.Value) });
         }
 
         // POST: LayoutDetalhes/Create
@@ -66,7 +70,8 @@ namespace WebAffinitiesMVC.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-
+            
+            ViewBag.ID_LAYOUT = new SelectList(db.LAYOUT.Where(x => x.ID.Equals(lAYOUTDETALHE.ID_LAYOUT)), "ID", "NOME");
             ViewBag.ID_HIERARQUIA = new SelectList(db.HIERARQUIA, "ID", "NOME", lAYOUTDETALHE.ID_HIERARQUIA);
             ViewBag.ID_TIPO = new SelectList(db.TIPO, "ID", "NOME", lAYOUTDETALHE.ID_TIPO);
             ViewBag.ID_LISTA = new SelectList(db.LISTA, "ID", "NOME", lAYOUTDETALHE.ID_LISTA);
@@ -86,6 +91,8 @@ namespace WebAffinitiesMVC.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.ID_LAYOUT = new SelectList(db.LAYOUT.Where(x => x.ID.Equals(lAYOUTDETALHE.ID_LAYOUT)), "ID", "NOME");
             ViewBag.ID_HIERARQUIA = new SelectList(db.HIERARQUIA, "ID", "NOME", lAYOUTDETALHE.ID_HIERARQUIA);
             ViewBag.ID_TIPO = new SelectList(db.TIPO, "ID", "NOME", lAYOUTDETALHE.ID_TIPO);
             ViewBag.ID_LISTA = new SelectList(db.LISTA, "ID", "NOME", lAYOUTDETALHE.ID_LISTA);
@@ -106,6 +113,8 @@ namespace WebAffinitiesMVC.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+
+            ViewBag.ID_LAYOUT = new SelectList(db.LAYOUT.Where(x => x.ID.Equals(lAYOUTDETALHE.ID_LAYOUT)), "ID", "NOME");
             ViewBag.ID_HIERARQUIA = new SelectList(db.HIERARQUIA, "ID", "NOME", lAYOUTDETALHE.ID_HIERARQUIA);
             ViewBag.ID_TIPO = new SelectList(db.TIPO, "ID", "NOME", lAYOUTDETALHE.ID_TIPO);
             ViewBag.ID_LISTA = new SelectList(db.LISTA, "ID", "NOME", lAYOUTDETALHE.ID_LISTA);
