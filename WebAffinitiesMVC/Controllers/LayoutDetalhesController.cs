@@ -63,12 +63,20 @@ namespace WebAffinitiesMVC.Controllers
             if (ModelState.IsValid)
             {               
                 //BUSCA O ULTIMO CARACTER DA HIERARQUIA PARA O LAYOUT EM QUESTÃO.
-                int? ultimoLayoutDetalhe = await db.LAYOUTDETALHE.Where(x => x.ID_HIERARQUIA.Equals(lAYOUTDETALHE.ID_HIERARQUIA) && x.ID_LAYOUT.Equals(lAYOUTDETALHE.ID_LAYOUT)).MaxAsync(x => x.FIM);
-                lAYOUTDETALHE.INICIO = ultimoLayoutDetalhe == null ? 1 : ultimoLayoutDetalhe.Value + 1;
-                lAYOUTDETALHE.FIM = ultimoLayoutDetalhe == null ? lAYOUTDETALHE.TAMANHO : lAYOUTDETALHE.INICIO + lAYOUTDETALHE.TAMANHO - 1;
+                if (db.LAYOUTDETALHE.Where(x => x.ID_HIERARQUIA.Equals(lAYOUTDETALHE.ID_HIERARQUIA) && x.ID_LAYOUT.Equals(lAYOUTDETALHE.ID_LAYOUT)).Count() > 0)
+                {
+                    int ultimoLayoutDetalhe = await db.LAYOUTDETALHE.Where(x => x.ID_HIERARQUIA.Equals(lAYOUTDETALHE.ID_HIERARQUIA) && x.ID_LAYOUT.Equals(lAYOUTDETALHE.ID_LAYOUT)).MaxAsync(x => x.FIM);
+                    lAYOUTDETALHE.INICIO = ultimoLayoutDetalhe + 1;
+                    lAYOUTDETALHE.FIM = lAYOUTDETALHE.INICIO + lAYOUTDETALHE.TAMANHO - 1;
+                }
+                else
+                {
+                    lAYOUTDETALHE.INICIO = 1;
+                    lAYOUTDETALHE.FIM = lAYOUTDETALHE.INICIO + lAYOUTDETALHE.TAMANHO - 1;
+                }
                 db.LAYOUTDETALHE.Add(lAYOUTDETALHE);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "LayoutDetalhes", new { idLayout = lAYOUTDETALHE.ID_LAYOUT });
             }
 
             return View(lAYOUTDETALHE);
@@ -142,7 +150,7 @@ namespace WebAffinitiesMVC.Controllers
             LAYOUTDETALHE lAYOUTDETALHE = await db.LAYOUTDETALHE.FindAsync(id);
             db.LAYOUTDETALHE.Remove(lAYOUTDETALHE);
             await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "LayoutDetalhes", new { idLayout = lAYOUTDETALHE.ID_LAYOUT });
         }
 
         protected override void Dispose(bool disposing)

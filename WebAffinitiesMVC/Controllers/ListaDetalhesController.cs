@@ -137,7 +137,7 @@ namespace WebAffinitiesMVC.Controllers
             LISTADETALHE lISTADETALHE = await db.LISTADETALHE.FindAsync(id);
             db.LISTADETALHE.Remove(lISTADETALHE);
             await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "ListaDetalhes", new { idLista = lISTADETALHE.ID_LISTA });
         }
 
         protected override void Dispose(bool disposing)

@@ -203,6 +203,7 @@
       <DependentUpon>WebFormatter.edmx</DependentUpon>
       <LastGenOutput>WebFormatter.cs</LastGenOutput>
     </Content>
+    <None Include="Properties\PublishProfiles\Local.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootswatch.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

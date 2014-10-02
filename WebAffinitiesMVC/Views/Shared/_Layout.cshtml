@@ -6,6 +6,11 @@
     <title>@ViewBag.Title - Web Formatter</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/Scripts/js")
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
 </head>
 <body>
     <div class="navbar navbar-default navbar-fixed-top">
@@ -36,6 +41,17 @@
                             <li>@Html.ActionLink("Criar", "Criar", "Arquivo")</li>
                             <li>@Html.ActionLink("Modificar", "Modificar", "Arquivo")</li>
                             <li>@Html.ActionLink("Excluir", "Modificar", "Arquivo")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Validar Arquivo <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            @foreach (var item in WebAffinitiesMVC.Controllers.ArquivoController.GetArquivos())
+                            {
+                                <li>@Html.ActionLink(item.NOME, "Index", "Arquivo", new { idArquivo = item.ID }, null)</li>
+                            }
+                            @*<li><a href="#">Comissões</a></li>
+                <li><a href="#">Nêutron</a></li>*@
                         </ul>
                     </li>
                 </ul>

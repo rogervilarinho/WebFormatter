@@ -83,7 +83,8 @@
                                 <td>
                                     <small>
                                         @Html.HiddenFor(modelItem => item.ID_LAYOUT)
-                                        @Html.DisplayFor(modelItem => item.NOME)
+                                        @Html.Label(item.NOME.Length > 19 ? item.NOME.Substring(0, 20) : item.NOME, new { @class = "small" })
+                                        @*@Html.DisplayFor(modelItem => item.NOME)*@
                                     </small>
                                 </td>
                                 <td>

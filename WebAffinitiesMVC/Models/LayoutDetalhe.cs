@@ -37,7 +37,7 @@ namespace WebAffinitiesMVC.Models
         [Display(Name = "Fixo")]
         [Required(ErrorMessage = "O fixo do campo é obrigatório!")]
         public string FIXO { get; set; }
-        [Display(Name = "Nome")]
+        [Display(Name = "Campo")]
         [Required(ErrorMessage = "O nome do campo é obrigatório!")]
         public string NOME { get; set; }
         [Display(Name = "Hierarquia")]

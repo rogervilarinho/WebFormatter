@@ -1,41 +1,45 @@
 ﻿@model WebAffinitiesMVC.Models.LISTADETALHE
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = String.Concat("Exclusão de Valor");
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Delete</h2>
+<div class="container">
+    <div class="page-header">
+        <h2 id="tables">@String.Concat("Exclusão de Lista")</h2>
+    </div>
+</div>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>LISTADETALHE</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.VALOR)
-        </dt>
+<div class="container">
+    <div class="col-lg-8">
+        <h3>@String.Concat("Deseja excluir o valor ", Model.VALOR, "?")</h3>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.VALOR)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.VALOR)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ID_LISTA)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.LISTA.NOME)
+            </dd>
+        </dl>
+    </div>
+</div>
+<div class="container">
+    <div class="col-lg-3">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-        <dd>
-            @Html.DisplayFor(model => model.VALOR)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LISTA.NOME)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LISTA.NOME)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
+            <div class="form-actions no-color">
+                @Html.ActionLink("Cancelar", "Index", "ListaDetalhes", new { idLista = Model.ID_LISTA }, new { @class = "btn btn-default btn-xs" }) |
+                <button type="submit" class="btn btn-primary btn-xs" value="Delete" data-toggle="tooltip" data-placement="right" title="">Excluir</button>
+            </div>
+        }
+    </div>
 </div>
