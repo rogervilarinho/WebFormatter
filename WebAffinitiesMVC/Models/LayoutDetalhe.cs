@@ -43,7 +43,8 @@ namespace WebAffinitiesMVC.Models
         [Display(Name = "Obrigatório")]
         [Required(ErrorMessage = "A obrigatoriedade do campo é obrigatório!")]
         public bool OBRIGATORIO { get; set; }
-        public Nullable<int> ORDEM { get; set; }
+        [Display(Name="Ordem")]
+        public int ORDEM { get; set; }
     
         public virtual LAYOUT LAYOUT { get; set; }
         public virtual LISTA LISTA { get; set; }

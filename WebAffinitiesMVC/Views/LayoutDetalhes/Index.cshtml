@@ -18,6 +18,11 @@
                     <tr>
                         <th>
                             <small>
+                                @Html.DisplayNameFor(model => model.ORDEM)
+                            </small>
+                        </th>
+                        <th>
+                            <small>
                                 @Html.DisplayNameFor(model => model.NOME)
                             </small>
                         </th>
@@ -75,6 +80,11 @@
                         foreach (var item in Model)
                         {
                             <tr class="active">
+                                <td>
+                                    <small>
+                                        @Html.DisplayFor(modelItem => item.ORDEM)
+                                    </small>
+                                </td>
                                 <td>
                                     <small>
                                         @Html.HiddenFor(modelItem => item.ID_LAYOUT)

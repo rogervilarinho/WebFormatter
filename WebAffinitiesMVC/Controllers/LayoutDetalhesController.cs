@@ -63,17 +63,20 @@ namespace WebAffinitiesMVC.Controllers
             if (ModelState.IsValid)
             {               
                 //BUSCA O ULTIMO CARACTER DA HIERARQUIA PARA O LAYOUT EM QUESTÃO.
-                //if (db.LAYOUTDETALHE.Where(x => x.ID_HIERARQUIA.Equals(lAYOUTDETALHE.ID_HIERARQUIA) && x.ID_LAYOUT.Equals(lAYOUTDETALHE.ID_LAYOUT)).Count() > 0)
-                //{
-                //    int ultimoLayoutDetalhe = await db.LAYOUTDETALHE.Where(x => x.ID_HIERARQUIA.Equals(lAYOUTDETALHE.ID_HIERARQUIA) && x.ID_LAYOUT.Equals(lAYOUTDETALHE.ID_LAYOUT)).MaxAsync(x => x.FIM);
-                //    lAYOUTDETALHE.INICIO = ultimoLayoutDetalhe + 1;
-                //    lAYOUTDETALHE.FIM = lAYOUTDETALHE.INICIO + lAYOUTDETALHE.TAMANHO - 1;
-                //}
-                //else
-                //{
-                //    lAYOUTDETALHE.INICIO = 1;
-                //    lAYOUTDETALHE.FIM = lAYOUTDETALHE.INICIO + lAYOUTDETALHE.TAMANHO - 1;
-                //}
+                if (db.LAYOUTDETALHE.Where(x => x.FIXO.ToUpper().Trim().Equals(lAYOUTDETALHE.FIXO.ToUpper().Trim()) && x.ID_LAYOUT.Equals(lAYOUTDETALHE.ID_LAYOUT)).Count() > 0)
+                {
+                    int ultimoLayoutDetalhe = await db.LAYOUTDETALHE.Where(x => x.FIXO.ToUpper().Trim().Equals(lAYOUTDETALHE.FIXO.ToUpper().Trim()) && x.ID_LAYOUT.Equals(lAYOUTDETALHE.ID_LAYOUT)).MaxAsync(x => x.FIM);
+                    lAYOUTDETALHE.INICIO = ultimoLayoutDetalhe + 1;
+                    lAYOUTDETALHE.FIM = lAYOUTDETALHE.INICIO + lAYOUTDETALHE.TAMANHO - 1;
+                    //SETA A ORDEM
+                    lAYOUTDETALHE.ORDEM = await db.LAYOUTDETALHE.Where(x => x.FIXO.ToUpper().Trim().Equals(lAYOUTDETALHE.FIXO.ToUpper().Trim()) && x.ID_LAYOUT.Equals(lAYOUTDETALHE.ID_LAYOUT)).MaxAsync(x => x.ORDEM) + 1;
+                }
+                else
+                {
+                    lAYOUTDETALHE.INICIO = 1;
+                    lAYOUTDETALHE.FIM = lAYOUTDETALHE.INICIO + lAYOUTDETALHE.TAMANHO - 1;
+                    lAYOUTDETALHE.ORDEM = await db.LAYOUTDETALHE.Where(x => x.FIXO.ToUpper().Trim().Equals(lAYOUTDETALHE.FIXO.ToUpper().Trim()) && x.ID_LAYOUT.Equals(lAYOUTDETALHE.ID_LAYOUT)).MaxAsync(x => x.ORDEM) + 1;
+                }
                 
                 db.LAYOUTDETALHE.Add(lAYOUTDETALHE);
                 await db.SaveChangesAsync();
@@ -92,6 +95,7 @@ namespace WebAffinitiesMVC.Controllers
             ViewBag.ID_TIPO = new SelectList(db.TIPO, "ID", "NOME", edit.ID_TIPO);
             ViewBag.ID_LISTA = new SelectList(db.LISTA.Where(x => x.ARQUIVO.ID.Equals(Layout.ID_ARQUIVO)), "ID", "NOME", edit.ID_LISTA);
             ViewBag.ID_VALIDACAO = new SelectList(db.VALIDACAO, "ID", "NOME", edit.ID_VALIDACAO);
+            ViewBag.ORDEM = new SelectList(db.LAYOUTDETALHE.Where(x => x.ID_LAYOUT.Equals(Layout.ID) && x.FIXO.ToUpper().Trim().Equals(edit.FIXO.ToUpper().Trim())), "ORDEM", "ORDEM", edit.ORDEM);
         }
         public void SetViewBag(int idLayout)
         {
@@ -126,7 +130,7 @@ namespace WebAffinitiesMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID,ID_LAYOUT,TAMANHO,INICIO,FIM,ID_TIPO,ID_VALIDACAO,ID_LISTA,ACEITAVEL,FIXO,NOME,ID_HIERARQUIA,OBRIGATORIO")] LAYOUTDETALHE lAYOUTDETALHE)
+        public async Task<ActionResult> Edit([Bind(Include = "ID,ID_LAYOUT,TAMANHO,INICIO,FIM,ID_TIPO,ID_VALIDACAO,ID_LISTA,ACEITAVEL,FIXO,NOME,ID_HIERARQUIA,OBRIGATORIO,ORDEM")] LAYOUTDETALHE lAYOUTDETALHE)
         {
             if (ModelState.IsValid)
             {
