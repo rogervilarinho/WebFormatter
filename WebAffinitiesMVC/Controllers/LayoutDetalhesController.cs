@@ -74,14 +74,25 @@ namespace WebAffinitiesMVC.Controllers
                     lAYOUTDETALHE.INICIO = 1;
                     lAYOUTDETALHE.FIM = lAYOUTDETALHE.INICIO + lAYOUTDETALHE.TAMANHO - 1;
                 }
+                
                 db.LAYOUTDETALHE.Add(lAYOUTDETALHE);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index", "LayoutDetalhes", new { idLayout = lAYOUTDETALHE.ID_LAYOUT });
             }
 
+            lAYOUTDETALHE.LAYOUT = await db.LAYOUT.FindAsync(lAYOUTDETALHE.ID_LAYOUT);
+            SetViewBag(lAYOUTDETALHE.ID_LAYOUT);
             return View(lAYOUTDETALHE);
         }
-
+        public void SetViewBag(int idLayout, LAYOUTDETALHE edit)
+        {
+            LAYOUT Layout = db.LAYOUT.Find(idLayout);
+            ViewBag.ID_LAYOUT = new SelectList(db.LAYOUT.Where(x => x.ID.Equals(Layout.ID)), "ID", "NOME", edit.ID_LAYOUT);
+            ViewBag.ID_HIERARQUIA = new SelectList(db.HIERARQUIA, "ID", "NOME", edit.ID_HIERARQUIA);
+            ViewBag.ID_TIPO = new SelectList(db.TIPO, "ID", "NOME", edit.ID_TIPO);
+            ViewBag.ID_LISTA = new SelectList(db.LISTA.Where(x => x.ARQUIVO.ID.Equals(Layout.ID_ARQUIVO)), "ID", "NOME", edit.ID_LISTA);
+            ViewBag.ID_VALIDACAO = new SelectList(db.VALIDACAO, "ID", "NOME", edit.ID_VALIDACAO);
+        }
         public void SetViewBag(int idLayout)
         {
             LAYOUT Layout = db.LAYOUT.Find(idLayout);
@@ -105,7 +116,8 @@ namespace WebAffinitiesMVC.Controllers
                 return HttpNotFound();
             }
 
-            SetViewBag(lAYOUTDETALHE.ID_LAYOUT);
+            SetViewBag(lAYOUTDETALHE.ID_LAYOUT, lAYOUTDETALHE);
+
             return View(lAYOUTDETALHE);
         }
 
@@ -118,9 +130,18 @@ namespace WebAffinitiesMVC.Controllers
         {
             if (ModelState.IsValid)
             {
+                bool ordernar = false;
+                //VERIFICA SE MUDOU O TAMANHO DO CAMPO 
+                var layoutAux = await db.LAYOUTDETALHE.Where(x => x.ID == lAYOUTDETALHE.ID).AsNoTracking().FirstOrDefaultAsync();
+                ordernar = layoutAux.TAMANHO.Equals(lAYOUTDETALHE.TAMANHO);
                 db.Entry(lAYOUTDETALHE).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                if(ordernar)
+                {
+                    //REORDENA TODAS AS POSIÇÕES
+
+                }
+                return RedirectToAction("Index", "LayoutDetalhes", new { idLayout = lAYOUTDETALHE.ID_LAYOUT });
             }
 
             SetViewBag(lAYOUTDETALHE.ID_LAYOUT);

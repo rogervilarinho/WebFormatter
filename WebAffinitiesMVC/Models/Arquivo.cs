@@ -11,28 +11,22 @@ namespace WebAffinitiesMVC.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class ARQUIVO
     {
         public ARQUIVO()
         {
             this.ARQUIVODETALHE = new HashSet<ARQUIVODETALHE>();
-            this.HIERARQUIA = new HashSet<HIERARQUIA>();
             this.LAYOUT = new HashSet<LAYOUT>();
             this.LISTA = new HashSet<LISTA>();
             this.VALIDACAO = new HashSet<VALIDACAO>();
         }
-
+    
         public int ID { get; set; }
-        [Display(Name = "Nome")]
-        [Required(ErrorMessage = "O campo nome é obrigatório!")]
         public string NOME { get; set; }
-        [Display(Name = "Descrição")]
         public string DESCRICAO { get; set; }
     
         public virtual ICollection<ARQUIVODETALHE> ARQUIVODETALHE { get; set; }
-        public virtual ICollection<HIERARQUIA> HIERARQUIA { get; set; }
         public virtual ICollection<LAYOUT> LAYOUT { get; set; }
         public virtual ICollection<LISTA> LISTA { get; set; }
         public virtual ICollection<VALIDACAO> VALIDACAO { get; set; }

@@ -135,9 +135,6 @@
     <Compile Include="Models\ARQUIVODETALHE.cs">
       <DependentUpon>WebFormatter.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\HIERARQUIA.cs">
-      <DependentUpon>WebFormatter.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\LAYOUT.cs">
       <DependentUpon>WebFormatter.tt</DependentUpon>
     </Compile>
@@ -148,6 +145,9 @@
       <DependentUpon>WebFormatter.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LISTADETALHE.cs">
+      <DependentUpon>WebFormatter.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>WebFormatter.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TIPO.cs">

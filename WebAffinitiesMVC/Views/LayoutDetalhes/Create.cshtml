@@ -4,6 +4,7 @@
     ViewBag.Title = String.Concat("Novo campo layout - ", Model.LAYOUT.NOME);
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <div class="container">
     <div class="page-header">
         <h2 id="tables">@String.Concat("Novo campo layout - ", Model.LAYOUT.NOME)</h2>
@@ -16,6 +17,7 @@
                 @using (Html.BeginForm("Create", "LayoutDetalhes", FormMethod.Post, new { @class = "form-horizontal" }))
                 {
                     @Html.AntiForgeryToken()
+
                     <fieldset>
                         <legend>@String.Concat("Novo Campo")</legend>
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -68,7 +70,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.ID_LISTA, htmlAttributes: new { @class = "col-lg-3 control-label" })
                             <div class="col-md-9">
-                                @Html.DropDownList("ID_LISTA", null, "- selecione -", htmlAttributes: new { id = "ID_LISTA", @class = "form-control" })
+                                @Html.DropDownListFor(model => model.ID_LISTA, null, "- selecione -", htmlAttributes: new { id = "ID_LISTA", @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.ID_LISTA, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -89,7 +91,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-offset-3 col-md-10">
-                                @Html.ActionLink("Cancelar", "Index", "LayoutDetalhes", new { idLayout = Model.ID }, new { @class = "btn btn-default" })
+                                @Html.ActionLink("Cancelar", "Index", "LayoutDetalhes", new { idLayout = Model.ID_LAYOUT }, new { @class = "btn btn-default" })
                                 <button type="submit" class="btn btn-primary" value="Create">Cadastrar</button>
                             </div>
                         </div>
@@ -98,42 +100,44 @@
             </div>
         </div>
         <div class="col-lg-6">
-            <div class="panel panel-warning">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Lista</h3>
-                </div>
-                <div class="panel-body">
-                    É a lista de valores que será utilizada na validação do registro no arquivo.
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="panel panel-danger">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Hierarquia</h3>
-                </div>
-                <div class="panel-body">
-                    É a hierarquia a que a linha do arquivo pertence.
+            <div class="row">
+                <div class="panel panel-warning">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Lista</h3>
+                    </div>
+                    <div class="panel-body">
+                        É a lista de valores que será utilizada na validação do registro no arquivo.
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Tipo</h3>
-                </div>
-                <div class="panel-body">
-                    É o tipo do campo no registro do arquivo.
+            <div class="row">
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Hierarquia</h3>
+                    </div>
+                    <div class="panel-body">
+                        É a hierarquia a que a linha do arquivo pertence.
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="panel panel-success">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Validação</h3>
+            <div class="row">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Tipo</h3>
+                    </div>
+                    <div class="panel-body">
+                        É o tipo do campo no registro do arquivo.
+                    </div>
                 </div>
-                <div class="panel-body">
-                    É a validação que será aplicada no campo do registro em questão.
+            </div>
+            <div class="row">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Validação</h3>
+                    </div>
+                    <div class="panel-body">
+                        É a validação que será aplicada no campo do registro em questão.
+                    </div>
                 </div>
             </div>
         </div>

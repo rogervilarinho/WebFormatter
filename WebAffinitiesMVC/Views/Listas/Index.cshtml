@@ -28,9 +28,6 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.NOME)
                             </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.DESCRICAO)
-                            </th>
                             <th></th>
                         </tr>
                     </thead>
@@ -42,9 +39,6 @@
                                 <tr class="warning">
                                     <td>
                                         @Html.DisplayFor(modelItem => item.NOME)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.DESCRICAO)
                                     </td>
                                     <td>
                                         @Html.ActionLink("Valores", "Index", "ListaDetalhes", new { idLista = item.ID }, new { @class = "btn btn-success btn-xs" }) |

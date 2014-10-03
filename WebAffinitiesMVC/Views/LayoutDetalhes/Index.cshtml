@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<WebAffinitiesMVC.Models.LAYOUTDETALHE>
 
 @{
-    ViewBag.Title = String.Concat("Criação de campos layout - ", Model.FirstOrDefault().LAYOUT.NOME);
+    ViewBag.Title = String.Concat("Criação de campos - ", Model.FirstOrDefault().LAYOUT.NOME);
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="container">
     <div class="page-header">
-        <h2 id="tables">@String.Concat("Criação de campos layout - ", Model.FirstOrDefault().LAYOUT.NOME)</h2>
+        <h2 id="tables">@String.Concat("Criação de campos - ", Model.FirstOrDefault().LAYOUT.NOME)</h2>
     </div>
 </div>
 <div class="container">
@@ -24,11 +24,6 @@
                         <th>
                             <small>
                                 @Html.DisplayNameFor(model => model.FIXO)
-                            </small>
-                        </th>
-                        <th>
-                            <small>
-                                @Html.DisplayNameFor(model => model.ID_HIERARQUIA)
                             </small>
                         </th>
                         <th>
@@ -83,18 +78,13 @@
                                 <td>
                                     <small>
                                         @Html.HiddenFor(modelItem => item.ID_LAYOUT)
-                                        @Html.Label(item.NOME.Length > 19 ? item.NOME.Substring(0, 20) : item.NOME, new { @class = "small" })
+                                        @Html.DisplayFor(modelItem => item.NOME)
                                         @*@Html.DisplayFor(modelItem => item.NOME)*@
                                     </small>
                                 </td>
                                 <td>
                                     <small>
                                         @Html.DisplayFor(modelItem => item.FIXO)
-                                    </small>
-                                </td>
-                                <td>
-                                    <small>
-                                        @Html.DisplayFor(modelItem => item.HIERARQUIA.NOME)
                                     </small>
                                 </td>
                                 <td>

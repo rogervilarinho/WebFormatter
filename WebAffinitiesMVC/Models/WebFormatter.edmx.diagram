@@ -7,20 +7,17 @@
       <Diagram DiagramId="173fec65456c430091ef0a64a2a58c95" Name="Diagram1" ZoomLevel="61">
         <EntityTypeShape EntityType="WebFormatterModel.ARQUIVO" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
         <EntityTypeShape EntityType="WebFormatterModel.ARQUIVODETALHE" Width="1.5" PointX="5.25" PointY="6.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebFormatterModel.HIERARQUIA" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="WebFormatterModel.LAYOUT" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
         <EntityTypeShape EntityType="WebFormatterModel.LAYOUTDETALHE" Width="1.5" PointX="5.25" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="WebFormatterModel.LISTA" Width="1.5" PointX="3" PointY="17" IsExpanded="true" />
         <EntityTypeShape EntityType="WebFormatterModel.TIPO" Width="1.5" PointX="3" PointY="11.25" IsExpanded="true" />
         <EntityTypeShape EntityType="WebFormatterModel.VALIDACAO" Width="1.5" PointX="3" PointY="14" IsExpanded="true" />
         <AssociationConnector Association="WebFormatterModel.FK_ARQUIVODETALHE_ARQUIVO" ManuallyRouted="false" />
-        <AssociationConnector Association="WebFormatterModel.FK_HIERARQUIA_ARQUIVO" ManuallyRouted="false" />
         <AssociationConnector Association="WebFormatterModel.FK_LAYOUT_ARQUIVO" ManuallyRouted="false" />
         <AssociationConnector Association="WebFormatterModel.FK_LISTA_ARQUIVO" ManuallyRouted="false" />
         <AssociationConnector Association="WebFormatterModel.FK_VALIDACAO_ARQUIVO" ManuallyRouted="false" />
         <AssociationConnector Association="WebFormatterModel.FK_ARQUIVODETALHE_LAYOUT" ManuallyRouted="false" >
         </AssociationConnector>
-        <AssociationConnector Association="WebFormatterModel.FK_LAYOUTDETALHE_HIERARQUIA" ManuallyRouted="false" />
         <AssociationConnector Association="WebFormatterModel.FK_LAYOUTDETALHE_LAYOUT" ManuallyRouted="false" />
         <AssociationConnector Association="WebFormatterModel.FK_LAYOUTDETALHE_LISTA" ManuallyRouted="false" />
         <AssociationConnector Association="WebFormatterModel.FK_LAYOUTDETALHE_VALIDACAO" ManuallyRouted="false" />

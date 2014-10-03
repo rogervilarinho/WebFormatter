@@ -25,14 +25,6 @@
           <Property Name="CRIACAO" Type="datetime" />
           <Property Name="ALTERACAO" Type="datetime" />
         </EntityType>
-        <EntityType Name="HIERARQUIA">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NOME" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="ID_ARQUIVO" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="LAYOUT">
           <Key>
             <PropertyRef Name="ID" />
@@ -59,6 +51,7 @@
           <Property Name="NOME" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="ID_HIERARQUIA" Type="int" Nullable="false" />
           <Property Name="OBRIGATORIO" Type="bit" Nullable="false" />
+          <Property Name="ORDEM" Type="int" />
         </EntityType>
         <EntityType Name="LISTA">
           <Key>
@@ -127,18 +120,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_HIERARQUIA_ARQUIVO">
-          <End Role="ARQUIVO" Type="Self.ARQUIVO" Multiplicity="1" />
-          <End Role="HIERARQUIA" Type="Self.HIERARQUIA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ARQUIVO">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="HIERARQUIA">
-              <PropertyRef Name="ID_ARQUIVO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_LAYOUT_ARQUIVO">
           <End Role="ARQUIVO" Type="Self.ARQUIVO" Multiplicity="1" />
           <End Role="LAYOUT" Type="Self.LAYOUT" Multiplicity="*" />
@@ -148,18 +129,6 @@
             </Principal>
             <Dependent Role="LAYOUT">
               <PropertyRef Name="ID_ARQUIVO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_LAYOUTDETALHE_HIERARQUIA">
-          <End Role="HIERARQUIA" Type="Self.HIERARQUIA" Multiplicity="1" />
-          <End Role="LAYOUTDETALHE" Type="Self.LAYOUTDETALHE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="HIERARQUIA">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="LAYOUTDETALHE">
-              <PropertyRef Name="ID_HIERARQUIA" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -250,7 +219,6 @@
         <EntityContainer Name="WebFormatterModelStoreContainer">
           <EntitySet Name="ARQUIVO" EntityType="Self.ARQUIVO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ARQUIVODETALHE" EntityType="Self.ARQUIVODETALHE" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="HIERARQUIA" EntityType="Self.HIERARQUIA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LAYOUT" EntityType="Self.LAYOUT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LAYOUTDETALHE" EntityType="Self.LAYOUTDETALHE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LISTA" EntityType="Self.LISTA" Schema="dbo" store:Type="Tables" />
@@ -266,17 +234,9 @@
             <End Role="LAYOUT" EntitySet="LAYOUT" />
             <End Role="ARQUIVODETALHE" EntitySet="ARQUIVODETALHE" />
           </AssociationSet>
-          <AssociationSet Name="FK_HIERARQUIA_ARQUIVO" Association="Self.FK_HIERARQUIA_ARQUIVO">
-            <End Role="ARQUIVO" EntitySet="ARQUIVO" />
-            <End Role="HIERARQUIA" EntitySet="HIERARQUIA" />
-          </AssociationSet>
           <AssociationSet Name="FK_LAYOUT_ARQUIVO" Association="Self.FK_LAYOUT_ARQUIVO">
             <End Role="ARQUIVO" EntitySet="ARQUIVO" />
             <End Role="LAYOUT" EntitySet="LAYOUT" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LAYOUTDETALHE_HIERARQUIA" Association="Self.FK_LAYOUTDETALHE_HIERARQUIA">
-            <End Role="HIERARQUIA" EntitySet="HIERARQUIA" />
-            <End Role="LAYOUTDETALHE" EntitySet="LAYOUTDETALHE" />
           </AssociationSet>
           <AssociationSet Name="FK_LAYOUTDETALHE_LAYOUT" Association="Self.FK_LAYOUTDETALHE_LAYOUT">
             <End Role="LAYOUT" EntitySet="LAYOUT" />
@@ -319,7 +279,6 @@
           <Property Name="NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="DESCRICAO" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ARQUIVODETALHE" Relationship="Self.FK_ARQUIVODETALHE_ARQUIVO" FromRole="ARQUIVO" ToRole="ARQUIVODETALHE" />
-          <NavigationProperty Name="HIERARQUIA" Relationship="Self.FK_HIERARQUIA_ARQUIVO" FromRole="ARQUIVO" ToRole="HIERARQUIA" />
           <NavigationProperty Name="LAYOUT" Relationship="Self.FK_LAYOUT_ARQUIVO" FromRole="ARQUIVO" ToRole="LAYOUT" />
           <NavigationProperty Name="LISTA" Relationship="Self.FK_LISTA_ARQUIVO" FromRole="ARQUIVO" ToRole="LISTA" />
           <NavigationProperty Name="VALIDACAO" Relationship="Self.FK_VALIDACAO_ARQUIVO" FromRole="ARQUIVO" ToRole="VALIDACAO" />
@@ -337,16 +296,6 @@
           <NavigationProperty Name="LAYOUT" Relationship="Self.FK_ARQUIVODETALHE_LAYOUT" FromRole="ARQUIVODETALHE" ToRole="LAYOUT" />
           <Property Name="CRIACAO" Type="DateTime" Precision="3" />
           <Property Name="ALTERACAO" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="HIERARQUIA">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ID_ARQUIVO" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ARQUIVO" Relationship="Self.FK_HIERARQUIA_ARQUIVO" FromRole="HIERARQUIA" ToRole="ARQUIVO" />
-          <NavigationProperty Name="LAYOUTDETALHE" Relationship="Self.FK_LAYOUTDETALHE_HIERARQUIA" FromRole="HIERARQUIA" ToRole="LAYOUTDETALHE" />
         </EntityType>
         <EntityType Name="LAYOUT">
           <Key>
@@ -375,13 +324,12 @@
           <Property Name="ACEITAVEL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FIXO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ID_HIERARQUIA" Type="Int32" Nullable="false" />
           <Property Name="OBRIGATORIO" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="HIERARQUIA" Relationship="Self.FK_LAYOUTDETALHE_HIERARQUIA" FromRole="LAYOUTDETALHE" ToRole="HIERARQUIA" />
           <NavigationProperty Name="TIPO" Relationship="Self.FK_LAYOUTDETALHE_LAYOUT" FromRole="LAYOUTDETALHE" ToRole="TIPO" />
           <NavigationProperty Name="LISTA" Relationship="Self.FK_LAYOUTDETALHE_LISTA" FromRole="LAYOUTDETALHE" ToRole="LISTA" />
           <NavigationProperty Name="VALIDACAO" Relationship="Self.FK_LAYOUTDETALHE_VALIDACAO" FromRole="LAYOUTDETALHE" ToRole="VALIDACAO" />
           <NavigationProperty Name="LAYOUT" Relationship="WebFormatterModel.FK_LAYOUTDETALHE_LAYOUT1" FromRole="LAYOUTDETALHE" ToRole="LAYOUT" />
+          <Property Name="ORDEM" Type="Int32" />
         </EntityType>
         <EntityType Name="LISTA">
           <Key>
@@ -422,18 +370,6 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="ARQUIVODETALHE">
-              <PropertyRef Name="ID_ARQUIVO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_HIERARQUIA_ARQUIVO">
-          <End Role="ARQUIVO" Type="Self.ARQUIVO" Multiplicity="1" />
-          <End Role="HIERARQUIA" Type="Self.HIERARQUIA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ARQUIVO">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="HIERARQUIA">
               <PropertyRef Name="ID_ARQUIVO" />
             </Dependent>
           </ReferentialConstraint>
@@ -486,18 +422,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LAYOUTDETALHE_HIERARQUIA">
-          <End Role="HIERARQUIA" Type="Self.HIERARQUIA" Multiplicity="1" />
-          <End Role="LAYOUTDETALHE" Type="Self.LAYOUTDETALHE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="HIERARQUIA">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="LAYOUTDETALHE">
-              <PropertyRef Name="ID_HIERARQUIA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_LAYOUTDETALHE_LAYOUT">
           <End Role="TIPO" Type="Self.TIPO" Multiplicity="1" />
           <End Role="LAYOUTDETALHE" Type="Self.LAYOUTDETALHE" Multiplicity="*" />
@@ -537,7 +461,6 @@
         <EntityContainer Name="WebFormatterEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ARQUIVO" EntityType="Self.ARQUIVO" />
           <EntitySet Name="ARQUIVODETALHE" EntityType="Self.ARQUIVODETALHE" />
-          <EntitySet Name="HIERARQUIA" EntityType="Self.HIERARQUIA" />
           <EntitySet Name="LAYOUT" EntityType="Self.LAYOUT" />
           <EntitySet Name="LAYOUTDETALHE" EntityType="Self.LAYOUTDETALHE" />
           <EntitySet Name="LISTA" EntityType="Self.LISTA" />
@@ -546,10 +469,6 @@
           <AssociationSet Name="FK_ARQUIVODETALHE_ARQUIVO" Association="Self.FK_ARQUIVODETALHE_ARQUIVO">
             <End Role="ARQUIVO" EntitySet="ARQUIVO" />
             <End Role="ARQUIVODETALHE" EntitySet="ARQUIVODETALHE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_HIERARQUIA_ARQUIVO" Association="Self.FK_HIERARQUIA_ARQUIVO">
-            <End Role="ARQUIVO" EntitySet="ARQUIVO" />
-            <End Role="HIERARQUIA" EntitySet="HIERARQUIA" />
           </AssociationSet>
           <AssociationSet Name="FK_LAYOUT_ARQUIVO" Association="Self.FK_LAYOUT_ARQUIVO">
             <End Role="ARQUIVO" EntitySet="ARQUIVO" />
@@ -566,10 +485,6 @@
           <AssociationSet Name="FK_ARQUIVODETALHE_LAYOUT" Association="Self.FK_ARQUIVODETALHE_LAYOUT">
             <End Role="LAYOUT" EntitySet="LAYOUT" />
             <End Role="ARQUIVODETALHE" EntitySet="ARQUIVODETALHE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LAYOUTDETALHE_HIERARQUIA" Association="Self.FK_LAYOUTDETALHE_HIERARQUIA">
-            <End Role="HIERARQUIA" EntitySet="HIERARQUIA" />
-            <End Role="LAYOUTDETALHE" EntitySet="LAYOUTDETALHE" />
           </AssociationSet>
           <AssociationSet Name="FK_LAYOUTDETALHE_LAYOUT" Association="Self.FK_LAYOUTDETALHE_LAYOUT">
             <End Role="TIPO" EntitySet="TIPO" />
@@ -665,15 +580,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="HIERARQUIA">
-            <EntityTypeMapping TypeName="WebFormatterModel.HIERARQUIA">
-              <MappingFragment StoreEntitySet="HIERARQUIA">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="NOME" ColumnName="NOME" />
-                <ScalarProperty Name="ID_ARQUIVO" ColumnName="ID_ARQUIVO" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="LAYOUT">
             <EntityTypeMapping TypeName="WebFormatterModel.LAYOUT">
               <MappingFragment StoreEntitySet="LAYOUT">
@@ -687,6 +593,7 @@
           <EntitySetMapping Name="LAYOUTDETALHE">
             <EntityTypeMapping TypeName="WebFormatterModel.LAYOUTDETALHE">
               <MappingFragment StoreEntitySet="LAYOUTDETALHE">
+                <ScalarProperty Name="ORDEM" ColumnName="ORDEM" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ID_LAYOUT" ColumnName="ID_LAYOUT" />
                 <ScalarProperty Name="TAMANHO" ColumnName="TAMANHO" />
@@ -698,7 +605,6 @@
                 <ScalarProperty Name="ACEITAVEL" ColumnName="ACEITAVEL" />
                 <ScalarProperty Name="FIXO" ColumnName="FIXO" />
                 <ScalarProperty Name="NOME" ColumnName="NOME" />
-                <ScalarProperty Name="ID_HIERARQUIA" ColumnName="ID_HIERARQUIA" />
                 <ScalarProperty Name="OBRIGATORIO" ColumnName="OBRIGATORIO" />
               </MappingFragment>
             </EntityTypeMapping>
