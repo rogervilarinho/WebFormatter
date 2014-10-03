@@ -147,9 +147,6 @@
     <Compile Include="Models\LISTADETALHE.cs">
       <DependentUpon>WebFormatter.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>WebFormatter.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\TIPO.cs">
       <DependentUpon>WebFormatter.tt</DependentUpon>
     </Compile>

@@ -4,27 +4,25 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="173fec65456c430091ef0a64a2a58c95" Name="Diagram1" ZoomLevel="61">
-        <EntityTypeShape EntityType="WebFormatterModel.ARQUIVO" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebFormatterModel.ARQUIVODETALHE" Width="1.5" PointX="5.25" PointY="6.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebFormatterModel.LAYOUT" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebFormatterModel.LAYOUTDETALHE" Width="1.5" PointX="5.25" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebFormatterModel.LISTA" Width="1.5" PointX="3" PointY="17" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebFormatterModel.TIPO" Width="1.5" PointX="3" PointY="11.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebFormatterModel.VALIDACAO" Width="1.5" PointX="3" PointY="14" IsExpanded="true" />
-        <AssociationConnector Association="WebFormatterModel.FK_ARQUIVODETALHE_ARQUIVO" ManuallyRouted="false" />
-        <AssociationConnector Association="WebFormatterModel.FK_LAYOUT_ARQUIVO" ManuallyRouted="false" />
-        <AssociationConnector Association="WebFormatterModel.FK_LISTA_ARQUIVO" ManuallyRouted="false" />
-        <AssociationConnector Association="WebFormatterModel.FK_VALIDACAO_ARQUIVO" ManuallyRouted="false" />
-        <AssociationConnector Association="WebFormatterModel.FK_ARQUIVODETALHE_LAYOUT" ManuallyRouted="false" >
-        </AssociationConnector>
-        <AssociationConnector Association="WebFormatterModel.FK_LAYOUTDETALHE_LAYOUT" ManuallyRouted="false" />
-        <AssociationConnector Association="WebFormatterModel.FK_LAYOUTDETALHE_LISTA" ManuallyRouted="false" />
-        <AssociationConnector Association="WebFormatterModel.FK_LAYOUTDETALHE_VALIDACAO" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="WebFormatterModel.LISTADETALHE" Width="1.5" PointX="5.25" PointY="17.25" IsExpanded="true" />
-        <AssociationConnector Association="WebFormatterModel.FK_LISTADETALHE_LISTA" />
-        <EntityTypeShape EntityType="WebFormatterModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" />
-        <AssociationConnector Association="WebFormatterModel.FK_LAYOUTDETALHE_LAYOUT1" />
+      <Diagram DiagramId="fe154e5fd8de4975ac6700b7af53dbd0" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="WebFormatterEntities.ARQUIVO" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebFormatterEntities.ARQUIVODETALHE" Width="1.5" PointX="5.25" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebFormatterEntities.LAYOUT" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebFormatterEntities.LAYOUTDETALHE" Width="1.5" PointX="8.25" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebFormatterEntities.LISTA" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebFormatterEntities.LISTADETALHE" Width="1.5" PointX="5.25" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebFormatterEntities.TIPO" Width="1.5" PointX="6" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebFormatterEntities.VALIDACAO" Width="1.5" PointX="3" PointY="14" IsExpanded="true" />
+        <AssociationConnector Association="WebFormatterEntities.FK_ARQUIVODETALHE_ARQUIVO" ManuallyRouted="false" />
+        <AssociationConnector Association="WebFormatterEntities.FK_LAYOUT_ARQUIVO" ManuallyRouted="false" />
+        <AssociationConnector Association="WebFormatterEntities.FK_LISTA_ARQUIVO" ManuallyRouted="false" />
+        <AssociationConnector Association="WebFormatterEntities.FK_VALIDACAO_ARQUIVO" ManuallyRouted="false" />
+        <AssociationConnector Association="WebFormatterEntities.FK_ARQUIVODETALHE_LAYOUT" ManuallyRouted="false" />
+        <AssociationConnector Association="WebFormatterEntities.FK_LAYOUTDETALHE_LAYOUT" ManuallyRouted="false" />
+        <AssociationConnector Association="WebFormatterEntities.FK_LAYOUTDETALHE_LISTA" ManuallyRouted="false" />
+        <AssociationConnector Association="WebFormatterEntities.FK_LAYOUTDETALHE_TIPO" ManuallyRouted="false" />
+        <AssociationConnector Association="WebFormatterEntities.FK_LAYOUTDETALHE_VALIDACAO" ManuallyRouted="false" />
+        <AssociationConnector Association="WebFormatterEntities.FK_LISTADETALHE_LISTA" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

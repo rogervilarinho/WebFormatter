@@ -30,9 +30,8 @@ namespace WebAffinitiesMVC.Models
         public virtual DbSet<LAYOUT> LAYOUT { get; set; }
         public virtual DbSet<LAYOUTDETALHE> LAYOUTDETALHE { get; set; }
         public virtual DbSet<LISTA> LISTA { get; set; }
+        public virtual DbSet<LISTADETALHE> LISTADETALHE { get; set; }
         public virtual DbSet<TIPO> TIPO { get; set; }
         public virtual DbSet<VALIDACAO> VALIDACAO { get; set; }
-        public virtual DbSet<LISTADETALHE> LISTADETALHE { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

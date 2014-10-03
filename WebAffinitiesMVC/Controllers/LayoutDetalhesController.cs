@@ -19,7 +19,7 @@ namespace WebAffinitiesMVC.Controllers
         public async Task<ActionResult> Index(int? idLayout)
         {
             if (!idLayout.HasValue) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            var lAYOUTDETALHE = db.LAYOUTDETALHE.Include(l => l.HIERARQUIA).Include(l => l.TIPO).Include(l => l.LISTA).Include(l => l.VALIDACAO);
+            var lAYOUTDETALHE = db.LAYOUTDETALHE.Include(l => l.TIPO).Include(l => l.LISTA).Include(l => l.VALIDACAO);
             var retorno = await lAYOUTDETALHE.Where(x => x.ID_LAYOUT.Equals(idLayout.Value)).ToListAsync();
             if (retorno.Count == 0)
             {
@@ -63,17 +63,17 @@ namespace WebAffinitiesMVC.Controllers
             if (ModelState.IsValid)
             {               
                 //BUSCA O ULTIMO CARACTER DA HIERARQUIA PARA O LAYOUT EM QUESTÃO.
-                if (db.LAYOUTDETALHE.Where(x => x.ID_HIERARQUIA.Equals(lAYOUTDETALHE.ID_HIERARQUIA) && x.ID_LAYOUT.Equals(lAYOUTDETALHE.ID_LAYOUT)).Count() > 0)
-                {
-                    int ultimoLayoutDetalhe = await db.LAYOUTDETALHE.Where(x => x.ID_HIERARQUIA.Equals(lAYOUTDETALHE.ID_HIERARQUIA) && x.ID_LAYOUT.Equals(lAYOUTDETALHE.ID_LAYOUT)).MaxAsync(x => x.FIM);
-                    lAYOUTDETALHE.INICIO = ultimoLayoutDetalhe + 1;
-                    lAYOUTDETALHE.FIM = lAYOUTDETALHE.INICIO + lAYOUTDETALHE.TAMANHO - 1;
-                }
-                else
-                {
-                    lAYOUTDETALHE.INICIO = 1;
-                    lAYOUTDETALHE.FIM = lAYOUTDETALHE.INICIO + lAYOUTDETALHE.TAMANHO - 1;
-                }
+                //if (db.LAYOUTDETALHE.Where(x => x.ID_HIERARQUIA.Equals(lAYOUTDETALHE.ID_HIERARQUIA) && x.ID_LAYOUT.Equals(lAYOUTDETALHE.ID_LAYOUT)).Count() > 0)
+                //{
+                //    int ultimoLayoutDetalhe = await db.LAYOUTDETALHE.Where(x => x.ID_HIERARQUIA.Equals(lAYOUTDETALHE.ID_HIERARQUIA) && x.ID_LAYOUT.Equals(lAYOUTDETALHE.ID_LAYOUT)).MaxAsync(x => x.FIM);
+                //    lAYOUTDETALHE.INICIO = ultimoLayoutDetalhe + 1;
+                //    lAYOUTDETALHE.FIM = lAYOUTDETALHE.INICIO + lAYOUTDETALHE.TAMANHO - 1;
+                //}
+                //else
+                //{
+                //    lAYOUTDETALHE.INICIO = 1;
+                //    lAYOUTDETALHE.FIM = lAYOUTDETALHE.INICIO + lAYOUTDETALHE.TAMANHO - 1;
+                //}
                 
                 db.LAYOUTDETALHE.Add(lAYOUTDETALHE);
                 await db.SaveChangesAsync();
@@ -88,7 +88,7 @@ namespace WebAffinitiesMVC.Controllers
         {
             LAYOUT Layout = db.LAYOUT.Find(idLayout);
             ViewBag.ID_LAYOUT = new SelectList(db.LAYOUT.Where(x => x.ID.Equals(Layout.ID)), "ID", "NOME", edit.ID_LAYOUT);
-            ViewBag.ID_HIERARQUIA = new SelectList(db.HIERARQUIA, "ID", "NOME", edit.ID_HIERARQUIA);
+            //ViewBag.ID_HIERARQUIA = new SelectList(db.HIERARQUIA, "ID", "NOME", edit.ID_HIERARQUIA);
             ViewBag.ID_TIPO = new SelectList(db.TIPO, "ID", "NOME", edit.ID_TIPO);
             ViewBag.ID_LISTA = new SelectList(db.LISTA.Where(x => x.ARQUIVO.ID.Equals(Layout.ID_ARQUIVO)), "ID", "NOME", edit.ID_LISTA);
             ViewBag.ID_VALIDACAO = new SelectList(db.VALIDACAO, "ID", "NOME", edit.ID_VALIDACAO);
@@ -97,7 +97,7 @@ namespace WebAffinitiesMVC.Controllers
         {
             LAYOUT Layout = db.LAYOUT.Find(idLayout);
             ViewBag.ID_LAYOUT = new SelectList(db.LAYOUT.Where(x => x.ID.Equals(Layout.ID)), "ID", "NOME");
-            ViewBag.ID_HIERARQUIA = new SelectList(db.HIERARQUIA, "ID", "NOME");
+            //ViewBag.ID_HIERARQUIA = new SelectList(db.HIERARQUIA, "ID", "NOME");
             ViewBag.ID_TIPO = new SelectList(db.TIPO, "ID", "NOME");
             ViewBag.ID_LISTA = new SelectList(db.LISTA.Where(x => x.ARQUIVO.ID.Equals(Layout.ID_ARQUIVO)), "ID", "NOME");
             ViewBag.ID_VALIDACAO = new SelectList(db.VALIDACAO, "ID", "NOME");

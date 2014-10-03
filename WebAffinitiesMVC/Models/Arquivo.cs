@@ -11,6 +11,7 @@ namespace WebAffinitiesMVC.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class ARQUIVO
     {
@@ -23,7 +24,10 @@ namespace WebAffinitiesMVC.Models
         }
     
         public int ID { get; set; }
+        [Display(Name = "Nome")]
+        [Required(ErrorMessage = "O campo nome é obrigatório!")]
         public string NOME { get; set; }
+        [Display(Name = "Descrição")]
         public string DESCRICAO { get; set; }
     
         public virtual ICollection<ARQUIVODETALHE> ARQUIVODETALHE { get; set; }

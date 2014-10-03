@@ -11,6 +11,7 @@ namespace WebAffinitiesMVC.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class LISTA
     {
@@ -21,8 +22,13 @@ namespace WebAffinitiesMVC.Models
         }
     
         public int ID { get; set; }
+        [Display(Name = "Nome")]
+        [Required(ErrorMessage = "O campo nome da lista é obrigatório!")]
         public string NOME { get; set; }
+        [Display(Name = "Descrição")]
         public string DESCRICAO { get; set; }
+        [Required(ErrorMessage = "O arquivo da lista é obrigatório!")]
+        [Range(1, int.MaxValue, ErrorMessage = "O arquivo da lista é obrigatório!")]
         public int ID_ARQUIVO { get; set; }
     
         public virtual ARQUIVO ARQUIVO { get; set; }

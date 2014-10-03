@@ -11,6 +11,7 @@ namespace WebAffinitiesMVC.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class TIPO
     {
@@ -20,6 +21,7 @@ namespace WebAffinitiesMVC.Models
         }
     
         public int ID { get; set; }
+        [Display(Name="Tipo")]
         public string NOME { get; set; }
     
         public virtual ICollection<LAYOUTDETALHE> LAYOUTDETALHE { get; set; }
