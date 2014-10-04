@@ -20,7 +20,7 @@ namespace WebAffinitiesMVC.Controllers
         {
             if (!idLayout.HasValue) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             var lAYOUTDETALHE = db.LAYOUTDETALHE.Include(l => l.TIPO).Include(l => l.LISTA).Include(l => l.VALIDACAO);
-            var retorno = await lAYOUTDETALHE.Where(x => x.ID_LAYOUT.Equals(idLayout.Value)).ToListAsync();
+            var retorno = await lAYOUTDETALHE.Where(x => x.ID_LAYOUT.Equals(idLayout.Value)).OrderBy(x => x.FIXO).ThenBy(x => x.ORDEM).ToListAsync();
             if (retorno.Count == 0)
             {
                 return View(new List<LAYOUTDETALHE>() { new LAYOUTDETALHE() { LAYOUT = await db.LAYOUT.FindAsync(idLayout.Value) } });
@@ -68,14 +68,13 @@ namespace WebAffinitiesMVC.Controllers
                     int ultimoLayoutDetalhe = await db.LAYOUTDETALHE.Where(x => x.FIXO.ToUpper().Trim().Equals(lAYOUTDETALHE.FIXO.ToUpper().Trim()) && x.ID_LAYOUT.Equals(lAYOUTDETALHE.ID_LAYOUT)).MaxAsync(x => x.FIM);
                     lAYOUTDETALHE.INICIO = ultimoLayoutDetalhe + 1;
                     lAYOUTDETALHE.FIM = lAYOUTDETALHE.INICIO + lAYOUTDETALHE.TAMANHO - 1;
-                    //SETA A ORDEM
-                    lAYOUTDETALHE.ORDEM = await db.LAYOUTDETALHE.Where(x => x.FIXO.ToUpper().Trim().Equals(lAYOUTDETALHE.FIXO.ToUpper().Trim()) && x.ID_LAYOUT.Equals(lAYOUTDETALHE.ID_LAYOUT)).MaxAsync(x => x.ORDEM) + 1;
+                    lAYOUTDETALHE.ORDEM = await db.LAYOUTDETALHE.Where(x => x.FIXO.ToUpper().Trim().Equals(lAYOUTDETALHE.FIXO.ToUpper().Trim()) && x.ID_LAYOUT.Equals(lAYOUTDETALHE.ID_LAYOUT)).MaxAsync(x => x.ORDEM) + 1;                
                 }
                 else
                 {
                     lAYOUTDETALHE.INICIO = 1;
                     lAYOUTDETALHE.FIM = lAYOUTDETALHE.INICIO + lAYOUTDETALHE.TAMANHO - 1;
-                    lAYOUTDETALHE.ORDEM = await db.LAYOUTDETALHE.Where(x => x.FIXO.ToUpper().Trim().Equals(lAYOUTDETALHE.FIXO.ToUpper().Trim()) && x.ID_LAYOUT.Equals(lAYOUTDETALHE.ID_LAYOUT)).MaxAsync(x => x.ORDEM) + 1;
+                    lAYOUTDETALHE.ORDEM = 1;
                 }
                 
                 db.LAYOUTDETALHE.Add(lAYOUTDETALHE);
@@ -95,7 +94,7 @@ namespace WebAffinitiesMVC.Controllers
             ViewBag.ID_TIPO = new SelectList(db.TIPO, "ID", "NOME", edit.ID_TIPO);
             ViewBag.ID_LISTA = new SelectList(db.LISTA.Where(x => x.ARQUIVO.ID.Equals(Layout.ID_ARQUIVO)), "ID", "NOME", edit.ID_LISTA);
             ViewBag.ID_VALIDACAO = new SelectList(db.VALIDACAO, "ID", "NOME", edit.ID_VALIDACAO);
-            ViewBag.ORDEM = new SelectList(db.LAYOUTDETALHE.Where(x => x.ID_LAYOUT.Equals(Layout.ID) && x.FIXO.ToUpper().Trim().Equals(edit.FIXO.ToUpper().Trim())), "ORDEM", "ORDEM", edit.ORDEM);
+            ViewBag.ORDEM = new SelectList(db.LAYOUTDETALHE.Where(x => x.ID_LAYOUT.Equals(Layout.ID) && x.FIXO.ToUpper().Trim().Equals(edit.FIXO.ToUpper().Trim())).OrderBy(x => x.ORDEM), "ORDEM", "ORDEM", edit.ORDEM);
         }
         public void SetViewBag(int idLayout)
         {
@@ -135,15 +134,66 @@ namespace WebAffinitiesMVC.Controllers
             if (ModelState.IsValid)
             {
                 bool ordernar = false;
-                //VERIFICA SE MUDOU O TAMANHO DO CAMPO 
                 var layoutAux = await db.LAYOUTDETALHE.Where(x => x.ID == lAYOUTDETALHE.ID).AsNoTracking().FirstOrDefaultAsync();
-                ordernar = layoutAux.TAMANHO.Equals(lAYOUTDETALHE.TAMANHO);
+                //SE A ORDEM OU TAMANHO MUDOU, ORDENA NOVAMENTE.
+                ordernar = !layoutAux.TAMANHO.Equals(lAYOUTDETALHE.TAMANHO) || !layoutAux.ORDEM.Equals(lAYOUTDETALHE.ORDEM);
                 db.Entry(lAYOUTDETALHE).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                if(ordernar)
+                //await db.SaveChangesAsync();
+                if (ordernar)
                 {
-                    //REORDENA TODAS AS POSIÇÕES
-
+                    //VERIFICA SE O QUE FOI MUDADO É A ORDEM
+                    if (!layoutAux.ORDEM.Equals(lAYOUTDETALHE.ORDEM))
+                    {
+                        //VERIFICA SE A ALTERAÇÃO É PARA CIMA OU PARA BAIXO
+                        bool asc = true;
+                        if (layoutAux.ORDEM < lAYOUTDETALHE.ORDEM) asc = false;
+                        int ordemAux = lAYOUTDETALHE.ORDEM;
+                        if (asc)
+                        {
+                            //SE SIM, ALTERA A ORDEM DE TODOS OS CAMPOS APÓS O CAMPO ALTERADO.
+                            await db.LAYOUTDETALHE.Where(x => x.FIXO.ToUpper().Trim().Equals(lAYOUTDETALHE.FIXO.ToUpper().Trim()) && x.ORDEM >= lAYOUTDETALHE.ORDEM).OrderBy(x => x.ORDEM).ForEachAsync(delegate(LAYOUTDETALHE detalhe)
+                            {
+                                if (!lAYOUTDETALHE.ID.Equals(detalhe.ID))
+                                {
+                                    detalhe.ORDEM = ordemAux + 1;
+                                    db.Entry(detalhe).State = EntityState.Modified;
+                                    ordemAux = ordemAux + 1;
+                                }
+                            });
+                        }
+                        else
+                        {
+                            //SE SIM, ALTERA A ORDEM DE TODOS OS CAMPOS APÓS O CAMPO ALTERADO.
+                            await db.LAYOUTDETALHE.Where(x => x.FIXO.ToUpper().Trim().Equals(lAYOUTDETALHE.FIXO.ToUpper().Trim()) && x.ORDEM <= lAYOUTDETALHE.ORDEM).OrderBy(x => x.ORDEM).ForEachAsync(delegate(LAYOUTDETALHE detalhe)
+                            {
+                                if (!lAYOUTDETALHE.ID.Equals(detalhe.ID))
+                                {
+                                    detalhe.ORDEM = ordemAux -1;
+                                    db.Entry(detalhe).State = EntityState.Modified;
+                                    ordemAux = ordemAux - 1;
+                                }
+                            });
+                        }
+                        await db.SaveChangesAsync();
+                    }
+                    int inicio = 1;
+                    await db.LAYOUTDETALHE.Where(x => x.FIXO.ToUpper().Trim().Equals(lAYOUTDETALHE.FIXO.ToUpper().Trim())).OrderBy(x => x.ORDEM).ForEachAsync(delegate(LAYOUTDETALHE detalhe)
+                    {
+                        if (detalhe.ORDEM.Equals(1))
+                        {
+                            detalhe.INICIO = inicio;
+                            detalhe.FIM = detalhe.TAMANHO;
+                            inicio = detalhe.FIM + 1;
+                        }
+                        else
+                        {
+                            detalhe.INICIO = inicio;
+                            detalhe.FIM = inicio + detalhe.TAMANHO - 1;
+                            inicio = detalhe.FIM + 1;
+                        }
+                        db.Entry(detalhe).State = EntityState.Modified;
+                    });
+                    await db.SaveChangesAsync();
                 }
                 return RedirectToAction("Index", "LayoutDetalhes", new { idLayout = lAYOUTDETALHE.ID_LAYOUT });
             }
