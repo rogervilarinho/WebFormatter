@@ -224,6 +224,34 @@ namespace WebAffinitiesMVC.Controllers
         {
             LAYOUTDETALHE lAYOUTDETALHE = await db.LAYOUTDETALHE.FindAsync(id);
             db.LAYOUTDETALHE.Remove(lAYOUTDETALHE);
+            int ordemAux = 0;
+            await db.LAYOUTDETALHE.Where(x => x.FIXO.ToUpper().Trim().Equals(lAYOUTDETALHE.FIXO.ToUpper().Trim())).OrderBy(x => x.ORDEM).ForEachAsync(delegate(LAYOUTDETALHE detalhe)
+            {
+                if (!lAYOUTDETALHE.ID.Equals(detalhe.ID))
+                {
+                    detalhe.ORDEM = ordemAux + 1;
+                    db.Entry(detalhe).State = EntityState.Modified;
+                    ordemAux = ordemAux + 1;
+                }
+            });
+            await db.SaveChangesAsync();
+            int inicio = 1;
+            await db.LAYOUTDETALHE.Where(x => x.FIXO.ToUpper().Trim().Equals(lAYOUTDETALHE.FIXO.ToUpper().Trim())).OrderBy(x => x.ORDEM).ForEachAsync(delegate(LAYOUTDETALHE detalhe)
+            {
+                if (detalhe.ORDEM.Equals(1))
+                {
+                    detalhe.INICIO = inicio;
+                    detalhe.FIM = detalhe.TAMANHO;
+                    inicio = detalhe.FIM + 1;
+                }
+                else
+                {
+                    detalhe.INICIO = inicio;
+                    detalhe.FIM = inicio + detalhe.TAMANHO - 1;
+                    inicio = detalhe.FIM + 1;
+                }
+                db.Entry(detalhe).State = EntityState.Modified;
+            });
             await db.SaveChangesAsync();
             return RedirectToAction("Index", "LayoutDetalhes", new { idLayout = lAYOUTDETALHE.ID_LAYOUT });
         }
