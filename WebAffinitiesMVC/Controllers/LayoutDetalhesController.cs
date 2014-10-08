@@ -151,7 +151,7 @@ namespace WebAffinitiesMVC.Controllers
                         if (asc)
                         {
                             //SE SIM, ALTERA A ORDEM DE TODOS OS CAMPOS APÓS O CAMPO ALTERADO.
-                            await db.LAYOUTDETALHE.Where(x => x.FIXO.ToUpper().Trim().Equals(lAYOUTDETALHE.FIXO.ToUpper().Trim()) && x.ORDEM >= lAYOUTDETALHE.ORDEM).OrderBy(x => x.ORDEM).ForEachAsync(delegate(LAYOUTDETALHE detalhe)
+                            await db.LAYOUTDETALHE.Where(x => x.ID_LAYOUT.Equals(lAYOUTDETALHE.ID_LAYOUT) && x.FIXO.ToUpper().Trim().Equals(lAYOUTDETALHE.FIXO.ToUpper().Trim()) && x.ORDEM >= lAYOUTDETALHE.ORDEM).OrderBy(x => x.ORDEM).ForEachAsync(delegate(LAYOUTDETALHE detalhe)
                             {
                                 if (!lAYOUTDETALHE.ID.Equals(detalhe.ID))
                                 {
@@ -164,7 +164,7 @@ namespace WebAffinitiesMVC.Controllers
                         else
                         {
                             //SE SIM, ALTERA A ORDEM DE TODOS OS CAMPOS APÓS O CAMPO ALTERADO.
-                            await db.LAYOUTDETALHE.Where(x => x.FIXO.ToUpper().Trim().Equals(lAYOUTDETALHE.FIXO.ToUpper().Trim()) && x.ORDEM <= lAYOUTDETALHE.ORDEM).OrderBy(x => x.ORDEM).ForEachAsync(delegate(LAYOUTDETALHE detalhe)
+                            await db.LAYOUTDETALHE.Where(x => x.ID_LAYOUT.Equals(lAYOUTDETALHE.ID_LAYOUT) && x.FIXO.ToUpper().Trim().Equals(lAYOUTDETALHE.FIXO.ToUpper().Trim()) && x.ORDEM <= lAYOUTDETALHE.ORDEM).OrderBy(x => x.ORDEM).ForEachAsync(delegate(LAYOUTDETALHE detalhe)
                             {
                                 if (!lAYOUTDETALHE.ID.Equals(detalhe.ID))
                                 {
@@ -177,7 +177,7 @@ namespace WebAffinitiesMVC.Controllers
                         await db.SaveChangesAsync();
                     }
                     int inicio = 1;
-                    await db.LAYOUTDETALHE.Where(x => x.FIXO.ToUpper().Trim().Equals(lAYOUTDETALHE.FIXO.ToUpper().Trim())).OrderBy(x => x.ORDEM).ForEachAsync(delegate(LAYOUTDETALHE detalhe)
+                    await db.LAYOUTDETALHE.Where(x => x.ID_LAYOUT.Equals(lAYOUTDETALHE.ID_LAYOUT) && x.FIXO.ToUpper().Trim().Equals(lAYOUTDETALHE.FIXO.ToUpper().Trim())).OrderBy(x => x.ORDEM).ForEachAsync(delegate(LAYOUTDETALHE detalhe)
                     {
                         if (detalhe.ORDEM.Equals(1))
                         {
@@ -193,8 +193,8 @@ namespace WebAffinitiesMVC.Controllers
                         }
                         db.Entry(detalhe).State = EntityState.Modified;
                     });
-                    await db.SaveChangesAsync();
                 }
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index", "LayoutDetalhes", new { idLayout = lAYOUTDETALHE.ID_LAYOUT });
             }
 
@@ -225,7 +225,7 @@ namespace WebAffinitiesMVC.Controllers
             LAYOUTDETALHE lAYOUTDETALHE = await db.LAYOUTDETALHE.FindAsync(id);
             db.LAYOUTDETALHE.Remove(lAYOUTDETALHE);
             int ordemAux = 0;
-            await db.LAYOUTDETALHE.Where(x => x.FIXO.ToUpper().Trim().Equals(lAYOUTDETALHE.FIXO.ToUpper().Trim())).OrderBy(x => x.ORDEM).ForEachAsync(delegate(LAYOUTDETALHE detalhe)
+            await db.LAYOUTDETALHE.Where(x => x.ID_LAYOUT.Equals(lAYOUTDETALHE.ID_LAYOUT) && x.FIXO.ToUpper().Trim().Equals(lAYOUTDETALHE.FIXO.ToUpper().Trim())).OrderBy(x => x.ORDEM).ForEachAsync(delegate(LAYOUTDETALHE detalhe)
             {
                 if (!lAYOUTDETALHE.ID.Equals(detalhe.ID))
                 {
@@ -236,7 +236,7 @@ namespace WebAffinitiesMVC.Controllers
             });
             await db.SaveChangesAsync();
             int inicio = 1;
-            await db.LAYOUTDETALHE.Where(x => x.FIXO.ToUpper().Trim().Equals(lAYOUTDETALHE.FIXO.ToUpper().Trim())).OrderBy(x => x.ORDEM).ForEachAsync(delegate(LAYOUTDETALHE detalhe)
+            await db.LAYOUTDETALHE.Where(x => x.ID_LAYOUT.Equals(lAYOUTDETALHE.ID_LAYOUT) && x.FIXO.ToUpper().Trim().Equals(lAYOUTDETALHE.FIXO.ToUpper().Trim())).OrderBy(x => x.ORDEM).ForEachAsync(delegate(LAYOUTDETALHE detalhe)
             {
                 if (detalhe.ORDEM.Equals(1))
                 {

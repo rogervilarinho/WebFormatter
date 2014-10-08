@@ -4,7 +4,6 @@
     ViewBag.Title = String.Concat("Criação de campos - ", Model.FirstOrDefault().LAYOUT.NOME);
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <div class="container">
     <div class="page-header">
         <h2 id="tables">@String.Concat("Criação de campos - ", Model.FirstOrDefault().LAYOUT.NOME)</h2>
@@ -17,9 +16,6 @@
                 <thead>
                     <tr>
                         <th>
-                            <small>
-                                @Html.DisplayNameFor(model => model.ORDEM)
-                            </small>
                         </th>
                         <th>
                             <small>
@@ -138,8 +134,7 @@
                                     </small>
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Alterar", "Edit", "LayoutDetalhes", new { id = item.ID }, new { @class = "btn btn-primary btn-xs" }) |
-                                    @Html.ActionLink("Excluir", "Delete", "LayoutDetalhes", new { id = item.ID }, new { @class = "btn btn-danger btn-xs" })
+                                    @Html.ActionLink("Alterar", "Edit", "LayoutDetalhes", new { id = item.ID }, new { @class = "btn btn-primary btn-xs" })|@Html.ActionLink("Excluir", "Delete", "LayoutDetalhes", new { id = item.ID }, new { @class = "btn btn-danger btn-xs" })
                                 </td>
                             </tr>
                         }

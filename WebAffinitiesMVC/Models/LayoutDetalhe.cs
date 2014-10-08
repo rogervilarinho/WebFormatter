@@ -18,7 +18,7 @@ namespace WebAffinitiesMVC.Models
         public int ID { get; set; }
         [Display(Name = "Layout")]
         public int ID_LAYOUT { get; set; }
-        [Display(Name = "Tamanho")]
+        [Display(Name = "Tam.")]
         [Required(ErrorMessage = "O tamanho do campo é obrigatório!")]
         public int TAMANHO { get; set; }
          [Display(Name = "Inicio")]
@@ -40,8 +40,8 @@ namespace WebAffinitiesMVC.Models
         [Display(Name = "Nome")]
         [Required(ErrorMessage = "O nome do campo é obrigatório!")]
         public string NOME { get; set; }
-        [Display(Name = "Obrigatório")]
-        [Required(ErrorMessage = "A obrigatoriedade do campo é obrigatório!")]
+        [Display(Name = "Obrig.")]
+        [Required(ErrorMessage = "O campo é obrigatório deve ser preenchido!")]
         public bool OBRIGATORIO { get; set; }
         [Display(Name="Ordem")]
         public int ORDEM { get; set; }
