@@ -12,7 +12,7 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-md-6">
             <div class="well bs-component">
                 @using (Html.BeginForm("Edit", "ListaDetalhes", FormMethod.Post, new { @class = "form-horizontal" }))
                 {
@@ -22,7 +22,7 @@
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         @Html.HiddenFor(model => model.ID)
                         <div class="form-group">
-                            @Html.LabelFor(model => model.VALOR, htmlAttributes: new { @class = "col-lg-2 control-label" })
+                            @Html.LabelFor(model => model.VALOR, htmlAttributes: new { @class = "col-md-2 control-label" })
                             <div class="col-md-10">
                                 @Html.EditorFor(model => model.VALOR, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.VALOR, "", new { @class = "text-danger" })
@@ -30,7 +30,7 @@
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.ID_LISTA, htmlAttributes: new { @class = "col-lg-2 control-label" })
+                            @Html.LabelFor(model => model.ID_LISTA, htmlAttributes: new { @class = "col-md-2 control-label" })
                             <div class="col-md-10">
                                 @Html.DropDownList("ID_LISTA", null, htmlAttributes: new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.ID_LISTA, "", new { @class = "text-danger" })

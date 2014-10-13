@@ -9,7 +9,7 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-md-6">
             <div class="well bs-component">
                 @using (Html.BeginForm("Alterar", "Arquivo", FormMethod.Post, new { @class = "form-horizontal" }))
                 {
@@ -18,8 +18,8 @@
                         <legend>Tipo de Arquivo</legend>
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="form-group">
-                            @Html.LabelFor(model => model.NOME, htmlAttributes: new { @class = "col-lg-2 control-label" })
-                            <div class="col-lg-10">
+                            @Html.LabelFor(model => model.NOME, htmlAttributes: new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
                                 @Html.EditorFor(model => model.NOME, new { htmlAttributes = new { @class = "form-control", placeholder = "Nome" } })
                                 @Html.ValidationMessageFor(model => model.NOME, "", new { @class = "text-danger" })
                             </div>
@@ -27,7 +27,7 @@
 
                         <div class="form-group">
                             @Html.LabelFor(model => model.DESCRICAO, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-lg-10">
+                            <div class="col-md-10">
                                 @Html.TextAreaFor(model => model.DESCRICAO, htmlAttributes : new { @class = "form-control", rows = "3", placeholder = "Descrição" } )
                                 @Html.ValidationMessageFor(model => model.DESCRICAO, "", new { @class = "text-danger" })
                                 <span class="help-block">Digite a descrição do arquivo que esta sendo criado, a mesma será utilizada nos relatórios do sistema.</span>
@@ -35,7 +35,7 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="col-lg-10 col-lg-offset-2">
+                            <div class="col-md-10 col-md-offset-2">
                                 <button class="btn btn-default btn-sm">Cancelar</button>
                                 <button type="submit" class="btn btn-primary btn-sm" value="Alterar">Alterar</button>
                             </div>

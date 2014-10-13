@@ -61,7 +61,7 @@ namespace WebAffinitiesMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID,ID_LAYOUT,TAMANHO,ID_TIPO,ID_VALIDACAO,ID_LISTA,ACEITAVEL,FIXO,NOME,ID_HIERARQUIA,OBRIGATORIO")] LAYOUTDETALHE lAYOUTDETALHE)
+        public async Task<ActionResult> Create([Bind(Include = "ID,ID_LAYOUT,TAMANHO,ID_TIPO,ID_VALIDACAO,ID_LISTA,ACEITAVEL,FIXO,NOME,ID_HIERARQUIA,OBRIGATORIO,DESCRICAO")] LAYOUTDETALHE lAYOUTDETALHE)
         {
             if (ModelState.IsValid)
             {               
@@ -132,7 +132,7 @@ namespace WebAffinitiesMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID,ID_LAYOUT,TAMANHO,INICIO,FIM,ID_TIPO,ID_VALIDACAO,ID_LISTA,ACEITAVEL,FIXO,NOME,ID_HIERARQUIA,OBRIGATORIO,ORDEM")] LAYOUTDETALHE lAYOUTDETALHE)
+        public async Task<ActionResult> Edit([Bind(Include = "ID,ID_LAYOUT,TAMANHO,INICIO,FIM,ID_TIPO,ID_VALIDACAO,ID_LISTA,ACEITAVEL,FIXO,NOME,ID_HIERARQUIA,OBRIGATORIO,ORDEM,DESCRICAO")] LAYOUTDETALHE lAYOUTDETALHE)
         {
             if (ModelState.IsValid)
             {
