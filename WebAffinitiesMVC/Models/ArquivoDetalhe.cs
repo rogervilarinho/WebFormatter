@@ -16,21 +16,44 @@ namespace WebAffinitiesMVC.Models
     public partial class ARQUIVODETALHE
     {
         public int ID { get; set; }
-        [Display(Name = "Nome")]
-        [Required(ErrorMessage = "O campo nome é obrigatório!")]
         public string NOME { get; set; }
-        [Display(Name = "Descrição")]
         public string DESCRICAO { get; set; }
-        [Display(Name = "Arquivo")]
         public int ID_ARQUIVO { get; set; }
-        [Display(Name = "Layout")]
-        [Range(1, int.MaxValue, ErrorMessage = "O layout do arquivo é obrigatório!")]
         public int ID_LAYOUT { get; set; }
-        [Display(Name = "Data de Criação")]
         public Nullable<System.DateTime> CRIACAO { get; set; }
-        [Display(Name = "Data de Alteração")]
         public Nullable<System.DateTime> ALTERACAO { get; set; }
     
+        public virtual ARQUIVO ARQUIVO { get; set; }
+        public virtual LAYOUT LAYOUT { get; set; }
+    }
+
+    [MetadataType(typeof(ArquivoDetalheMetaData))]
+    public partial class ARQUIVODETALHE
+    {
+        
+    }
+
+    public class ArquivoDetalheMetaData
+    {
+        public int ID { get; set; }
+        [Display(Name="Nome")]
+        [Required(ErrorMessage="O campo nome é obrigatório!")]
+        [StringLength(50)]
+        public string NOME { get; set; }
+        [Display(Name = "Descrição")]
+        [StringLength(200)]
+        public string DESCRICAO { get; set; }
+        [Display(Name = "Arquivo")]
+        [Range(1, Int32.MaxValue, ErrorMessage="O tipo de arquivo é obrigatório!")]
+        public int ID_ARQUIVO { get; set; }
+        [Display(Name = "Layout")]
+        [Range(1, Int32.MaxValue, ErrorMessage = "O layout é obrigatório!")]
+        public int ID_LAYOUT { get; set; }
+        [Display(Name = "Data de criação")]
+        public Nullable<System.DateTime> CRIACAO { get; set; }
+        [Display(Name = "Data de alteração")]
+        public Nullable<System.DateTime> ALTERACAO { get; set; }
+
         public virtual ARQUIVO ARQUIVO { get; set; }
         public virtual LAYOUT LAYOUT { get; set; }
     }

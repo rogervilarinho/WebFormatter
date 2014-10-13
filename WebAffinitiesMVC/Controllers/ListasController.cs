@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebAffinitiesMVC.Models;
+using WebAffinitiesMVC;
 
 namespace WebAffinitiesMVC.Controllers
 {

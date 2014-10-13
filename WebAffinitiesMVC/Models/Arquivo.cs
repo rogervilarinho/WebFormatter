@@ -24,10 +24,38 @@ namespace WebAffinitiesMVC.Models
         }
     
         public int ID { get; set; }
-        [Display(Name = "Nome")]
-        [Required(ErrorMessage = "O campo nome é obrigatório!")]
+        public string NOME { get; set; }
+        public string DESCRICAO { get; set; }
+    
+        public virtual ICollection<ARQUIVODETALHE> ARQUIVODETALHE { get; set; }
+        public virtual ICollection<LAYOUT> LAYOUT { get; set; }
+        public virtual ICollection<LISTA> LISTA { get; set; }
+        public virtual ICollection<VALIDACAO> VALIDACAO { get; set; }
+    }
+
+    [MetadataType(typeof(ArquivoMetaData))]
+    public partial class ARQUIVO
+    {
+
+    }
+
+    public class ArquivoMetaData
+    {
+        public ArquivoMetaData()
+        {
+            this.ARQUIVODETALHE = new HashSet<ARQUIVODETALHE>();
+            this.LAYOUT = new HashSet<LAYOUT>();
+            this.LISTA = new HashSet<LISTA>();
+            this.VALIDACAO = new HashSet<VALIDACAO>();
+        }
+    
+        public int ID { get; set; }
+        [Display(Name="Nome")]
+        [Required]
+        [StringLength(50, ErrorMessage="O tamanho do campo nome é de 50 caracteres!")]
         public string NOME { get; set; }
         [Display(Name = "Descrição")]
+        [StringLength(200, ErrorMessage = "O tamanho do campo descrição é de 200 caracteres!")]
         public string DESCRICAO { get; set; }
     
         public virtual ICollection<ARQUIVODETALHE> ARQUIVODETALHE { get; set; }

@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Linq.Expressions;
+using System.Web.Routing;
+using System.ComponentModel.DataAnnotations;
 using WebAffinitiesMVC.Models;
 
 namespace WebAffinitiesMVC.Controllers
@@ -147,7 +150,7 @@ namespace WebAffinitiesMVC.Controllers
                         //VERIFICA SE A ALTERAÇÃO É PARA CIMA OU PARA BAIXO
                         bool asc = true;
                         if (layoutAux.ORDEM < lAYOUTDETALHE.ORDEM) asc = false;
-                        int ordemAux = lAYOUTDETALHE.ORDEM;
+                        int? ordemAux = lAYOUTDETALHE.ORDEM;
                         if (asc)
                         {
                             //SE SIM, ALTERA A ORDEM DE TODOS OS CAMPOS APÓS O CAMPO ALTERADO.
@@ -264,5 +267,6 @@ namespace WebAffinitiesMVC.Controllers
             }
             base.Dispose(disposing);
         }
+
     }
 }

@@ -6,12 +6,13 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
 using System.Net;
+using WebAffinitiesMVC.Models;
 
 namespace WebAffinitiesMVC.Controllers
 {
     public class ArquivoController : Controller
     {
-        WebAffinitiesMVC.Models.WebFormatterEntities db = new Models.WebFormatterEntities();
+        WebFormatterEntities db = new Models.WebFormatterEntities();
         // GET: Arquivo
         public async Task<ActionResult> Index(int? idArquivo)
         {

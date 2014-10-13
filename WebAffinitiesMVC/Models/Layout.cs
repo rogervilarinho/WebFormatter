@@ -13,22 +13,42 @@ namespace WebAffinitiesMVC.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     
+     public partial class LAYOUT
+     {
+         public LAYOUT()
+         {
+             this.ARQUIVODETALHE = new HashSet<ARQUIVODETALHE>();
+             this.LAYOUTDETALHE = new HashSet<LAYOUTDETALHE>();
+         }
+
+         public int ID { get; set; }
+         public string NOME { get; set; }
+         public string DESCRICAO { get; set; }
+         public int ID_ARQUIVO { get; set; }
+
+         public virtual ARQUIVO ARQUIVO { get; set; }
+         public virtual ICollection<ARQUIVODETALHE> ARQUIVODETALHE { get; set; }
+         public virtual ICollection<LAYOUTDETALHE> LAYOUTDETALHE { get; set; }
+     }
+
+    [MetadataType(typeof(LayoutMetaData))]
     public partial class LAYOUT
     {
-        public LAYOUT()
-        {
-            this.ARQUIVODETALHE = new HashSet<ARQUIVODETALHE>();
-            this.LAYOUTDETALHE = new HashSet<LAYOUTDETALHE>();
-        }
-    
+     
+    }
+
+    public class LayoutMetaData
+    {
         public int ID { get; set; }
-        [Display(Name = "Nome")]
-        [Required(ErrorMessage = "O campo nome do layout é obrigatório!")]
+        [Display(Name="Nome")]
+        [Required(ErrorMessage="O campo nome é obrigatório!")]
+        [StringLength(50)]
         public string NOME { get; set; }
         [Display(Name = "Descrição")]
+        [StringLength(200)]
         public string DESCRICAO { get; set; }
-        [Display(Name = "Arquivo")]
-        [Range(1, int.MaxValue, ErrorMessage = "O arquivo do layout é obrigatório!")]
+        [Display(Name="Arquivo")]
+        [Range(1,Int32.MaxValue,ErrorMessage="O campo arquivo é obrigatório!")]
         public int ID_ARQUIVO { get; set; }
     
         public virtual ARQUIVO ARQUIVO { get; set; }

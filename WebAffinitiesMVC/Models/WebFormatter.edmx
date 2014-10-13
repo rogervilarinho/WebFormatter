@@ -51,6 +51,7 @@
           <Property Name="NOME" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="OBRIGATORIO" Type="bit" Nullable="false" />
           <Property Name="ORDEM" Type="int" />
+          <Property Name="DESCRICAO" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="LISTA">
           <Key>
@@ -315,6 +316,7 @@
           <Property Name="NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="OBRIGATORIO" Type="Boolean" Nullable="false" />
           <Property Name="ORDEM" Type="Int32" />
+          <Property Name="DESCRICAO" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="LAYOUT" Relationship="Self.FK_LAYOUTDETALHE_LAYOUT" FromRole="LAYOUTDETALHE" ToRole="LAYOUT" />
           <NavigationProperty Name="LISTA" Relationship="Self.FK_LAYOUTDETALHE_LISTA" FromRole="LAYOUTDETALHE" ToRole="LISTA" />
           <NavigationProperty Name="TIPO" Relationship="Self.FK_LAYOUTDETALHE_TIPO" FromRole="LAYOUTDETALHE" ToRole="TIPO" />
@@ -584,6 +586,7 @@
                 <ScalarProperty Name="NOME" ColumnName="NOME" />
                 <ScalarProperty Name="OBRIGATORIO" ColumnName="OBRIGATORIO" />
                 <ScalarProperty Name="ORDEM" ColumnName="ORDEM" />
+                <ScalarProperty Name="DESCRICAO" ColumnName="DESCRICAO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

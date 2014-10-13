@@ -16,14 +16,25 @@ namespace WebAffinitiesMVC.Models
     public partial class LISTADETALHE
     {
         public int ID { get; set; }
-        [Display(Name = "Valor")]
-        [Required(ErrorMessage = "O campo valor é obrigatório!")]
         public string VALOR { get; set; }
-        [Display(Name = "Lista")]
-        [Required(ErrorMessage = "A lista do valor é obrigatória!")]
-        [Range(1, int.MaxValue, ErrorMessage = "A lista do valor é obrigatória!")]
         public int ID_LISTA { get; set; }
     
+        public virtual LISTA LISTA { get; set; }
+    }
+    [MetadataType(typeof(ListaDetalheMetaData))]
+    public partial class LISTADETALHE
+    { }
+    public class ListaDetalheMetaData
+    {
+        public int ID { get; set; }
+        [Display(Name="Valor")]
+        [Required(ErrorMessage="O campo valor é obrigatório!")]
+        [StringLength(200)]
+        public string VALOR { get; set; }
+        [Display(Name = "Lista")]
+        [Range(1,Int32.MaxValue, ErrorMessage="O campo lista é obrigatório!")]
+        public int ID_LISTA { get; set; }
+
         public virtual LISTA LISTA { get; set; }
     }
 }

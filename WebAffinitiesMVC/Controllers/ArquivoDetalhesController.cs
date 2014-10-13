@@ -16,10 +16,12 @@ namespace WebAffinitiesMVC.Controllers
         private WebFormatterEntities db = new WebFormatterEntities();
 
         // GET: ArquivoDetalhes
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int? idArquivo)
         {
+            if (!idArquivo.HasValue) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             var aRQUIVODETALHE = db.ARQUIVODETALHE.Include(a => a.ARQUIVO.ID).Include(a => a.LAYOUT);
-            return View(await aRQUIVODETALHE.ToListAsync());
+            var retorno = await aRQUIVODETALHE.Where(x => x.ID.Equals(idArquivo.Value)).ToListAsync();
+            return View(retorno);
         }
 
         // GET: ArquivoDetalhes/Details/5

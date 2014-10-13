@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using WebAffinitiesMVC.Models;
+using WebAffinitiesMVC;
 
 namespace WebAffinitiesMVC.ViewModels
 {

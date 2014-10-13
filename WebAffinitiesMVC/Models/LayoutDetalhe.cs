@@ -11,41 +11,75 @@ namespace WebAffinitiesMVC.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
     
     public partial class LAYOUTDETALHE
     {
         public int ID { get; set; }
-        [Display(Name = "Layout")]
         public int ID_LAYOUT { get; set; }
-        [Display(Name = "Tam.")]
-        [Required(ErrorMessage = "O tamanho do campo é obrigatório!")]
         public int TAMANHO { get; set; }
-         [Display(Name = "Inicio")]
+        public int INICIO { get; set; }
+        public int FIM { get; set; }
+        public int ID_TIPO { get; set; }
+        public Nullable<int> ID_VALIDACAO { get; set; }
+        public Nullable<int> ID_LISTA { get; set; }
+        public string ACEITAVEL { get; set; }
+        public string FIXO { get; set; }
+        public string NOME { get; set; }
+        public bool OBRIGATORIO { get; set; }
+        public Nullable<int> ORDEM { get; set; }
+        public string DESCRICAO { get; set; }
+    
+        public virtual LAYOUT LAYOUT { get; set; }
+        public virtual LISTA LISTA { get; set; }
+        public virtual TIPO TIPO { get; set; }
+        public virtual VALIDACAO VALIDACAO { get; set; }
+    }
+
+    [MetadataType(typeof(LayoutDetalheMetaData))]
+    public partial class LAYOUTDETALHE
+    { }
+
+    public class LayoutDetalheMetaData
+    {
+        public int ID { get; set; }
+        [Display(Name="Layout")]
+        [Range(1,Int32.MaxValue, ErrorMessage="O campo layout é obrigatório!")]
+        public int ID_LAYOUT { get; set; }
+        [Display(Name = "Tamanho")]
+        [Range(1, Int32.MaxValue, ErrorMessage = "O campo tamanho é obrigatório!")]
+        public int TAMANHO { get; set; }
+        [Display(Name = "Inicio")]
         public int INICIO { get; set; }
         [Display(Name = "Fim")]
         public int FIM { get; set; }
         [Display(Name = "Tipo")]
-        [Required(ErrorMessage = "O tipo do campo é obrigatório!")]
+        [Range(1, Int32.MaxValue, ErrorMessage = "O campo tipo é obrigatório!")]
         public int ID_TIPO { get; set; }
-         [Display(Name = "Validação")]
+        [Display(Name = "Validação")]
         public Nullable<int> ID_VALIDACAO { get; set; }
         [Display(Name = "Lista")]
         public Nullable<int> ID_LISTA { get; set; }
         [Display(Name = "Aceitável")]
+        [StringLength(50)]
         public string ACEITAVEL { get; set; }
         [Display(Name = "Fixo")]
-        [Required(ErrorMessage = "O fixo do campo é obrigatório!")]
+        [Required(ErrorMessage="O campo fixo é obrigatório!")]
+        [StringLength(50)]
         public string FIXO { get; set; }
         [Display(Name = "Nome")]
-        [Required(ErrorMessage = "O nome do campo é obrigatório!")]
+        [Required(ErrorMessage = "O campo nome é obrigatório!")]
+        [StringLength(50)]
         public string NOME { get; set; }
-        [Display(Name = "Obrig.")]
-        [Required(ErrorMessage = "O campo é obrigatório deve ser preenchido!")]
+        [Display(Name = "Obrigatório?")]
         public bool OBRIGATORIO { get; set; }
-        [Display(Name="Ordem")]
-        public int ORDEM { get; set; }
-    
+        [Display(Name = "Ordem")]
+        [Range(1, Int32.MaxValue, ErrorMessage = "O campo ordem é obrigatório!")]
+        public Nullable<int> ORDEM { get; set; }
+        [Display(Name = "Descrição")]
+        [StringLength(200)]
+        public string DESCRICAO { get; set; }
+
         public virtual LAYOUT LAYOUT { get; set; }
         public virtual LISTA LISTA { get; set; }
         public virtual TIPO TIPO { get; set; }

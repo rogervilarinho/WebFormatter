@@ -4,15 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="fe154e5fd8de4975ac6700b7af53dbd0" Name="Diagram1" ZoomLevel="64">
-        <EntityTypeShape EntityType="WebFormatterEntities.ARQUIVO" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebFormatterEntities.ARQUIVODETALHE" Width="1.5" PointX="5.25" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebFormatterEntities.LAYOUT" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
+      <Diagram DiagramId="7435b8e065ad41119160d6fab7bd43d2" Name="Diagram1" ZoomLevel="108">
+        <EntityTypeShape EntityType="WebFormatterEntities.ARQUIVO" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebFormatterEntities.ARQUIVODETALHE" Width="1.5" PointX="5.25" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebFormatterEntities.LAYOUT" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
         <EntityTypeShape EntityType="WebFormatterEntities.LAYOUTDETALHE" Width="1.5" PointX="8.25" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebFormatterEntities.LISTA" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebFormatterEntities.LISTADETALHE" Width="1.5" PointX="5.25" PointY="11.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebFormatterEntities.TIPO" Width="1.5" PointX="6" PointY="14.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebFormatterEntities.VALIDACAO" Width="1.5" PointX="3" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebFormatterEntities.LISTA" Width="1.5" PointX="3" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebFormatterEntities.LISTADETALHE" Width="1.5" PointX="5.25" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebFormatterEntities.TIPO" Width="1.5" PointX="6" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebFormatterEntities.VALIDACAO" Width="1.5" PointX="3" PointY="14.125" IsExpanded="true" />
         <AssociationConnector Association="WebFormatterEntities.FK_ARQUIVODETALHE_ARQUIVO" ManuallyRouted="false" />
         <AssociationConnector Association="WebFormatterEntities.FK_LAYOUT_ARQUIVO" ManuallyRouted="false" />
         <AssociationConnector Association="WebFormatterEntities.FK_LISTA_ARQUIVO" ManuallyRouted="false" />
